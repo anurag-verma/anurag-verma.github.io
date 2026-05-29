@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Anurag Verma — Full Stack Laravel Developer with 6+ years building CRMs, e-commerce platforms, and AI-powered automation systems in Bhopal, India." />
+  <meta name="author" content="Anurag Verma" />
+  <meta name="theme-color" content="#07080d" />
+  <title>Anurag Verma — Full Stack Laravel Developer</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%236366f1'/%3E%3Cstop offset='100%25' stop-color='%2322d3ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%2307080d'/%3E%3Cpath d='M32 13l14 38h-8.4l-3.1-8.8H21.5L18.4 51H10L24 13h8zm0 11.4l-7.2 20.1h14.4L32 24.4z' fill='url(%23g)'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+          },
+          colors: {
+            obsidian: { DEFAULT: '#07080d', 50: '#0c0e16', 100: '#11141f', 200: '#181c2a' },
+            accent: { indigo: '#6366f1', cyan: '#22d3ee', emerald: '#10b981' },
+          },
+          boxShadow: {
+            glow: '0 0 40px -8px rgba(99, 102, 241, 0.45)',
+            'glow-cyan': '0 0 32px -6px rgba(34, 211, 238, 0.35)',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    :root {
+      --bg: #07080d;
+      --surface: rgba(17, 20, 31, 0.72);
+      --border: rgba(255, 255, 255, 0.08);
+      --accent: #6366f1;
+      --accent-cyan: #22d3ee;
+    }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: #e8eaf0;
+    }
+    .mesh-bg {
+      background-image:
+        radial-gradient(ellipse 80% 50% at 90% -10%, rgba(99, 102, 241, 0.18), transparent),
+        radial-gradient(ellipse 60% 40% at 10% 90%, rgba(34, 211, 238, 0.08), transparent);
+    }
+    .glass {
+      background: var(--surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+    }
+    .gradient-border {
+      position: relative;
+      background: linear-gradient(135deg, rgba(17, 20, 31, 0.95), rgba(12, 14, 22, 0.98));
+      border-radius: 1rem;
+    }
+    .gradient-border::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.55), rgba(34, 211, 238, 0.25), rgba(255, 255, 255, 0.06));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .action-link {
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .action-link:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 24px -4px rgba(99, 102, 241, 0.5);
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .timeline-track::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, #6366f1, rgba(34, 211, 238, 0.3), transparent);
+    }
+    .exp-panel { display: none; }
+    .exp-panel.active { display: block; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { transition: none; }
+      html { scroll-behavior: auto; }
+    }
+    .mobile-nav-safe { padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px)); }
+    @media (min-width: 1024px) {
+      .mobile-nav-safe { padding-bottom: 0; }
+    }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-track { animation: marquee 28s linear infinite; }
+    .skill-pill, .tech-badge {
+      display: inline-block;
+      padding: 0.35rem 0.75rem;
+      border-radius: 0.375rem;
+      font-size: 0.65rem;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      color: #94a3b8;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .skill-pill:hover { border-color: rgba(99, 102, 241, 0.4); color: #fff; }
+    .tech-badge { background: #11141f; }
+    .project-tab.active {
+      background: #6366f1;
+      color: #fff;
+      box-shadow: 0 0 40px -8px rgba(99, 102, 241, 0.45);
+    }
+    .project-tab:not(.active):hover { color: #fff; }
+    .project-card { transition: transform 0.25s ease; }
+    .project-card:hover { transform: translateY(-3px); }
+    .exp-tab.active {
+      color: #fff;
+      border-color: rgba(99, 102, 241, 0.5);
+      box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.3);
+    }
+    .exp-tab:not(.active):hover { color: #cbd5e1; }
+    #about { background: rgba(12, 14, 22, 0.55); }
+    .about-profile-card { position: relative; z-index: 1; }
+    .about-avatar {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #6366f1, #22d3ee);
+      color: #07080d;
+      box-shadow: 0 8px 28px -6px rgba(99, 102, 241, 0.55);
+    }
+    .about-meta-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.85rem;
+    }
+    .about-meta-row:last-child { border-bottom: none; }
+    .about-meta-label {
+      flex-shrink: 0;
+      width: 5.5rem;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #64748b;
+      padding-top: 0.15rem;
+    }
+    .about-focus-card {
+      padding: 1rem 1.1rem;
+      border-radius: 0.75rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .about-focus-card:hover {
+      border-color: rgba(99, 102, 241, 0.35);
+      transform: translateY(-2px);
+    }
+    .about-focus-card h4 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      margin-bottom: 0.35rem;
+    }
+    .about-focus-card p {
+      font-size: 0.75rem;
+      line-height: 1.55;
+      color: #94a3b8;
+      font-weight: 300;
+    }
+    .domain-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.68rem;
+      color: #cbd5e1;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.2s;
+    }
+    .domain-pill:hover {
+      color: #fff;
+      border-color: rgba(34, 211, 238, 0.4);
+      background: rgba(34, 211, 238, 0.06);
+    }
+    .domain-pill::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #22d3ee;
+      box-shadow: 0 0 8px rgba(34, 211, 238, 0.6);
+    }
+    .skills-category { margin-bottom: 1.75rem; }
+    .skills-category:last-child { margin-bottom: 0; }
+    .skills-category-label {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #6366f1;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .skills-category-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(99, 102, 241, 0.35), transparent);
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.65rem;
+    }
+    .skill-tag {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 0.85rem;
+      border-radius: 0.5rem;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.72rem;
+      color: #94a3b8;
+      background: rgba(17, 20, 31, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      transition: all 0.2s;
+      cursor: default;
+    }
+    .skill-tag:hover {
+      color: #f1f5f9;
+      border-color: rgba(99, 102, 241, 0.4);
+      transform: translateY(-2px);
+    }
+    .skill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .nav-logo {
+      display: inline-flex;
+      text-decoration: none;
+      color: inherit;
+    }
+    .nav-logo-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      padding: 0.4rem 0.85rem 0.4rem 0.5rem;
+      border-radius: 0.75rem;
+      background: linear-gradient(145deg, rgba(99, 102, 241, 0.22), rgba(34, 211, 238, 0.1));
+      border: 1px solid rgba(99, 102, 241, 0.45);
+      box-shadow: 0 6px 22px -6px rgba(99, 102, 241, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .nav-logo:hover .nav-logo-box {
+      transform: translateY(-1px);
+      border-color: rgba(34, 211, 238, 0.5);
+      box-shadow: 0 10px 28px -6px rgba(99, 102, 241, 0.65);
+    }
+    .nav-logo-a {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.65rem;
+      height: 1.65rem;
+      margin-right: -0.2rem;
+    }
+    .nav-logo-a svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .nav-logo-rest {
+      display: flex;
+      align-items: baseline;
+      font-size: clamp(1.1rem, 2.8vw, 1.4rem);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      margin-left: -0.06em;
+      line-height: 1;
+      color: #f8fafc;
+      white-space: nowrap;
+      transform: translateY(0.06em);
+    }
+    .nav-logo-tld {
+      background: linear-gradient(110deg, #a5b4fc 0%, #22d3ee 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    @media (min-width: 1024px) {
+      .nav-logo-box {
+        padding: 0.45rem 1rem 0.45rem 0.55rem;
+        border-radius: 0.85rem;
+      }
+      .nav-logo-a {
+        width: 1.85rem;
+        height: 1.85rem;
+      }
+      .nav-logo-rest {
+        font-size: 1.45rem;
+        transform: translateY(0.06em);
+      }
+    }
+  </style>
+</head>
+<body class="mesh-bg antialiased mobile-nav-safe">
+
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-indigo-500 focus:text-white">Skip to main content</a>
+
+  <!-- Desktop / tablet header -->
+  <header class="fixed top-0 inset-x-0 z-[100] glass border-b border-white/[0.06]" role="banner">
+    <nav class="max-w-6xl mx-auto flex items-center justify-between px-5 py-4 lg:px-8" aria-label="Primary">
+      <a href="#hero" class="nav-logo focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07080d] rounded-lg" aria-label="Anurag.dev — home">
+        <span class="nav-logo-box">
+          <span class="nav-logo-a" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="logoGrad" x1="4" y1="4" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#818cf8"/>
+                  <stop offset="1" stop-color="#22d3ee"/>
+                </linearGradient>
+              </defs>
+              <path d="M16 5L26 27H20.2L17.8 20.4H14.2L11.8 27H6L16 5Z" fill="url(#logoGrad)"/>
+              <path d="M16 12.2L13.1 19.6H18.9L16 12.2Z" fill="#07080d" fill-opacity="0.85"/>
+            </svg>
+          </span>
+          <span class="nav-logo-rest">nurag<span class="nav-logo-tld">.dev</span></span>
+        </span>
+      </a>
+
+      <ul class="hidden lg:flex items-center gap-8 font-mono text-[0.7rem] uppercase tracking-widest text-slate-400" role="list">
+        <li><a href="#about" class="hover:text-white transition-colors focus:outline-none focus-visible:text-indigo-300">About</a></li>
+        <li><a href="#projects" class="hover:text-white transition-colors focus:outline-none focus-visible:text-indigo-300">Projects</a></li>
+        <li><a href="#experience" class="hover:text-white transition-colors focus:outline-none focus-visible:text-indigo-300">Experience</a></li>
+        <li>
+          <a href="#contact" class="inline-flex items-center px-4 py-2 rounded-full bg-indigo-500 text-white font-medium tracking-normal normal-case text-sm hover:bg-indigo-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400">
+            Contact
+          </a>
+        </li>
+      </ul>
+
+      <button type="button" id="menuToggle" class="lg:hidden p-2 rounded-lg text-slate-300 hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400" aria-expanded="false" aria-controls="mobileDrawer" aria-label="Open navigation menu">
+        <svg class="w-6 h-6" id="menuIconOpen" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="w-6 h-6 hidden" id="menuIconClose" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Mobile drawer -->
+  <div id="mobileDrawer" class="fixed inset-0 z-[110] lg:hidden pointer-events-none opacity-0 transition-opacity duration-200" aria-hidden="true">
+    <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" id="drawerBackdrop"></div>
+    <aside class="absolute right-0 top-0 h-full w-[min(100%,20rem)] glass border-l border-white/10 p-6 pt-20 translate-x-full transition-transform duration-300" id="drawerPanel" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+      <ul class="flex flex-col gap-4 font-mono text-sm uppercase tracking-wider text-slate-400" role="list">
+        <li><a href="#about" class="mobile-nav-link block py-2 hover:text-white">About</a></li>
+        <li><a href="#projects" class="mobile-nav-link block py-2 hover:text-white">Projects</a></li>
+        <li><a href="#experience" class="mobile-nav-link block py-2 hover:text-white">Experience</a></li>
+        <li><a href="#contact" class="mobile-nav-link inline-flex mt-2 px-4 py-2 rounded-full bg-indigo-500 text-white normal-case">Contact</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Mobile bottom nav -->
+  <nav class="fixed bottom-0 inset-x-0 z-[100] lg:hidden glass border-t border-white/[0.08] pb-[env(safe-area-inset-bottom)]" aria-label="Mobile section navigation">
+    <ul class="flex justify-around items-center py-2 px-1" role="list">
+      <li>
+        <a href="#hero" class="bottom-nav-link flex flex-col items-center gap-0.5 px-2 py-1.5 text-[0.65rem] font-mono text-slate-500 hover:text-cyan-400 transition-colors" data-section="hero">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg>
+          Home
+        </a>
+      </li>
+      <li>
+        <a href="#projects" class="bottom-nav-link flex flex-col items-center gap-0.5 px-2 py-1.5 text-[0.65rem] font-mono text-slate-500 hover:text-cyan-400 transition-colors" data-section="projects">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
+          Work
+        </a>
+      </li>
+      <li>
+        <a href="#experience" class="bottom-nav-link flex flex-col items-center gap-0.5 px-2 py-1.5 text-[0.65rem] font-mono text-slate-500 hover:text-cyan-400 transition-colors" data-section="experience">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M8 7h8M8 17h8"/></svg>
+          Exp
+        </a>
+      </li>
+      <li>
+        <a href="#contact" class="bottom-nav-link flex flex-col items-center gap-0.5 px-2 py-1.5 text-[0.65rem] font-mono text-slate-500 hover:text-cyan-400 transition-colors" data-section="contact">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM4 8l8 5 8-5"/></svg>
+          Contact
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <main id="main">
+
+    <!-- Hero -->
+    <section id="hero" class="relative min-h-[100dvh] flex flex-col justify-center pt-24 pb-16 px-5 lg:px-8 max-w-6xl mx-auto" aria-labelledby="hero-heading">
+      <div class="absolute top-20 right-0 w-72 h-72 bg-indigo-500/20 rounded-full blur-[100px] pointer-events-none" aria-hidden="true"></div>
+      <div class="absolute bottom-32 left-0 w-48 h-48 bg-cyan-400/10 rounded-full blur-[80px] pointer-events-none" aria-hidden="true"></div>
+
+      <div class="relative z-10 max-w-3xl">
+        <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 mb-8 text-xs font-mono text-slate-400 tracking-wide reveal">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true"></span>
+          Open to new opportunities
+        </div>
+
+        <h1 id="hero-heading" class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.05] mb-6 reveal">
+          Full Stack<br />
+          <span class="bg-gradient-to-r from-indigo-400 via-indigo-300 to-cyan-400 bg-clip-text text-transparent">Laravel</span><br />
+          <span class="text-slate-500">Developer.</span>
+        </h1>
+
+        <p class="text-lg text-slate-400 leading-relaxed max-w-xl mb-10 font-light reveal">
+          6+ years building CRMs, e-commerce platforms, and automation systems. Expert in Laravel &amp; PHP, with a strong focus on AI-powered workflows and clean REST API architecture.
+        </p>
+
+        <div class="flex flex-wrap gap-3 reveal">
+          <a href="#projects" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-indigo-500 text-white font-medium hover:bg-indigo-400 transition-all hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 shadow-glow">
+            View my work
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="mailto:anuragv26@gmail.com" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg glass text-slate-200 font-medium hover:border-white/20 transition-all hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400">
+            Get in touch
+          </a>
+        </div>
+      </div>
+
+      <!-- Impact Metric Ribbon -->
+      <div class="relative z-10 mt-16 lg:mt-20 reveal" role="region" aria-label="Impact metrics">
+        <div class="gradient-border p-[1px] rounded-2xl">
+          <div class="rounded-2xl glass grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-white/[0.06] overflow-hidden">
+            <div class="p-6 lg:p-8 text-center lg:text-left">
+              <p class="font-mono text-[0.65rem] uppercase tracking-widest text-indigo-400 mb-2">Experience</p>
+              <p class="text-3xl lg:text-4xl font-bold tabular-nums text-white">6<span class="text-indigo-400">+</span></p>
+              <p class="text-sm text-slate-500 mt-1">Years shipping production systems</p>
+            </div>
+            <div class="p-6 lg:p-8 text-center lg:text-left">
+              <p class="font-mono text-[0.65rem] uppercase tracking-widest text-cyan-400 mb-2">Companies</p>
+              <p class="text-3xl lg:text-4xl font-bold tabular-nums text-white">3</p>
+              <p class="text-sm text-slate-500 mt-1">Organizations &amp; client environments</p>
+            </div>
+            <div class="p-6 lg:p-8 text-center lg:text-left">
+              <p class="font-mono text-[0.65rem] uppercase tracking-widest text-emerald-400 mb-2">Projects</p>
+              <p class="text-3xl lg:text-4xl font-bold tabular-nums text-white">10<span class="text-emerald-400">+</span></p>
+              <p class="text-sm text-slate-500 mt-1">Products &amp; platforms delivered</p>
+            </div>
+            <div class="p-6 lg:p-8 text-center lg:text-left">
+              <p class="font-mono text-[0.65rem] uppercase tracking-widest text-indigo-300 mb-2">Engagement</p>
+              <p class="text-3xl lg:text-4xl font-bold tabular-nums text-white">30<span class="text-cyan-400">%</span></p>
+              <p class="text-sm text-slate-500 mt-1">User engagement lift via AI &amp; push</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech marquee -->
+    <div class="border-y border-white/[0.06] bg-obsidian-50/80 overflow-hidden py-3" aria-hidden="true">
+      <div class="marquee-track flex w-max gap-8 font-mono text-[0.7rem] uppercase tracking-widest text-slate-500">
+        <div class="flex shrink-0 gap-8 pr-8">
+          <span class="text-indigo-400">◆</span> Laravel <span class="text-indigo-400">◆</span> PHP <span class="text-indigo-400">◆</span> React.js
+          <span class="text-indigo-400">◆</span> Node.js <span class="text-indigo-400">◆</span> MySQL <span class="text-indigo-400">◆</span> MongoDB
+          <span class="text-indigo-400">◆</span> REST APIs <span class="text-indigo-400">◆</span> Tailwind CSS <span class="text-indigo-400">◆</span> OpenAI API
+          <span class="text-indigo-400">◆</span> WhatsApp API <span class="text-indigo-400">◆</span> Zapier <span class="text-indigo-400">◆</span> Git
+        </div>
+        <div class="flex shrink-0 gap-8 pr-8" aria-hidden="true">
+          <span class="text-indigo-400">◆</span> Laravel <span class="text-indigo-400">◆</span> PHP <span class="text-indigo-400">◆</span> React.js
+          <span class="text-indigo-400">◆</span> Node.js <span class="text-indigo-400">◆</span> MySQL <span class="text-indigo-400">◆</span> MongoDB
+          <span class="text-indigo-400">◆</span> REST APIs <span class="text-indigo-400">◆</span> Tailwind CSS <span class="text-indigo-400">◆</span> OpenAI API
+          <span class="text-indigo-400">◆</span> WhatsApp API <span class="text-indigo-400">◆</span> Zapier <span class="text-indigo-400">◆</span> Git
+        </div>
+      </div>
+    </div>
+
+    <!-- About -->
+    <section id="about" class="py-20 lg:py-28 px-5 lg:px-8 max-w-6xl mx-auto border-t border-white/[0.06]" aria-labelledby="about-heading">
+      <p class="font-mono text-xs text-indigo-400 uppercase tracking-[0.2em] mb-3 reveal">// 01 — about</p>
+      <h2 id="about-heading" class="text-3xl lg:text-4xl font-bold tracking-tight reveal">The developer behind the code.</h2>
+      <p class="text-slate-400 max-w-2xl font-light leading-relaxed mt-3 reveal">Laravel-first engineer shipping CRMs, portals, and automation systems — with a recent focus on AI-powered workflows that move real business metrics.</p>
+
+      <div class="grid lg:grid-cols-[1fr_minmax(280px,340px)] gap-10 lg:gap-14 mt-12 items-start">
+        <div class="reveal">
+          <div class="space-y-5 text-slate-400 leading-relaxed font-light">
+            <p>I'm <strong class="text-white font-medium">Anurag Verma</strong>, a Full Stack Web Developer based in <strong class="text-white font-medium">Bhopal, India</strong> with 6+ years of experience building web applications across CRM, e-commerce, education, and marketing domains.</p>
+            <p>My core expertise is <strong class="text-white font-medium">Laravel &amp; PHP</strong>, and I'm equally comfortable working on frontends with React.js and building APIs with Node.js. I care about clean architecture, maintainability, and shipping things that actually work.</p>
+            <p>Lately I've been deep into <strong class="text-white font-medium">AI integrations and automation</strong> — building OpenAI-powered chatbots, designing event-driven workflows with Zapier &amp; Make, and using GitHub Copilot and Cursor to accelerate delivery.</p>
+            <p>I speak <strong class="text-white font-medium">English</strong> and <strong class="text-white font-medium">Hindi</strong> fluently and have experience working with distributed teams across multiple client environments.</p>
+          </div>
+
+          <div class="grid sm:grid-cols-3 gap-3 mt-8" role="list" aria-label="Core strengths">
+            <div class="about-focus-card" role="listitem">
+              <h4>Clean architecture</h4>
+              <p>Modular Laravel codebases, REST APIs, and RBAC built for long-term maintainability.</p>
+            </div>
+            <div class="about-focus-card" role="listitem">
+              <h4>AI &amp; automation</h4>
+              <p>OpenAI chatbots, Zapier/Make pipelines, and integrations that cut manual ops work.</p>
+            </div>
+            <div class="about-focus-card" role="listitem">
+              <h4>Cross-team delivery</h4>
+              <p>Comfortable leading SDLC, mentoring juniors, and coordinating across client environments.</p>
+            </div>
+          </div>
+
+          <div class="pt-8">
+            <p class="font-mono text-xs text-cyan-400 uppercase tracking-widest mb-3">AI &amp; Automation stack</p>
+            <div class="flex flex-wrap gap-2" role="list" aria-label="AI and automation tools">
+              <span class="px-3 py-1 rounded-full text-xs font-mono bg-indigo-500/10 border border-indigo-500/30 text-indigo-300">OpenAI API</span>
+              <span class="px-3 py-1 rounded-full text-xs font-mono bg-indigo-500/10 border border-indigo-500/30 text-indigo-300">GitHub Copilot</span>
+              <span class="px-3 py-1 rounded-full text-xs font-mono bg-indigo-500/10 border border-indigo-500/30 text-indigo-300">Cursor</span>
+              <span class="px-3 py-1 rounded-full text-xs font-mono bg-indigo-500/10 border border-indigo-500/30 text-indigo-300">Zapier</span>
+              <span class="px-3 py-1 rounded-full text-xs font-mono bg-indigo-500/10 border border-indigo-500/30 text-indigo-300">Make</span>
+              <span class="px-3 py-1 rounded-full text-xs font-mono bg-indigo-500/10 border border-indigo-500/30 text-indigo-300">Pabbly Connect</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="gradient-border p-6 lg:p-7 about-profile-card reveal" aria-label="Profile summary">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="about-avatar" aria-hidden="true">AV</div>
+            <div>
+              <p class="font-bold text-lg text-white leading-tight">Anurag Verma</p>
+              <p class="text-sm text-indigo-300 mt-0.5">Full Stack Laravel Developer</p>
+            </div>
+          </div>
+
+          <div class="mb-6">
+            <div class="about-meta-row">
+              <span class="about-meta-label">Based in</span>
+              <span class="text-slate-300">Bhopal, India</span>
+            </div>
+            <div class="about-meta-row">
+              <span class="about-meta-label">Languages</span>
+              <span class="text-slate-300">English · Hindi</span>
+            </div>
+            <div class="about-meta-row">
+              <span class="about-meta-label">Primary stack</span>
+              <span class="text-slate-300">Laravel · PHP · React · Node</span>
+            </div>
+            <div class="about-meta-row">
+              <span class="about-meta-label">Focus</span>
+              <span class="text-slate-300">CRM · APIs · Automation</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-px rounded-xl overflow-hidden border border-white/[0.08]" role="list" aria-label="Quick statistics">
+            <div class="glass p-4 hover:bg-white/[0.03] transition-colors" role="listitem">
+              <p class="text-2xl font-bold text-indigo-400 tabular-nums">6+</p>
+              <p class="text-xs text-slate-500 mt-1">Years experience</p>
+            </div>
+            <div class="glass p-4 hover:bg-white/[0.03] transition-colors" role="listitem">
+              <p class="text-2xl font-bold text-cyan-400 tabular-nums">3</p>
+              <p class="text-xs text-slate-500 mt-1">Companies</p>
+            </div>
+            <div class="glass p-4 hover:bg-white/[0.03] transition-colors" role="listitem">
+              <p class="text-2xl font-bold text-emerald-400 tabular-nums">10+</p>
+              <p class="text-xs text-slate-500 mt-1">Projects shipped</p>
+            </div>
+            <div class="glass p-4 hover:bg-white/[0.03] transition-colors" role="listitem">
+              <p class="text-2xl font-bold text-indigo-300 tabular-nums">4</p>
+              <p class="text-xs text-slate-500 mt-1">Domains served</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="mt-14 reveal">
+        <p class="font-mono text-xs text-slate-500 uppercase tracking-widest mb-4">Domains I've shipped in</p>
+        <div class="flex flex-wrap gap-2" role="list">
+          <span class="domain-pill" role="listitem">CRM &amp; Lead Management</span>
+          <span class="domain-pill" role="listitem">E-commerce</span>
+          <span class="domain-pill" role="listitem">Education</span>
+          <span class="domain-pill" role="listitem">Marketing &amp; Affiliate</span>
+        </div>
+      </div>
+
+      <div id="skills" class="mt-14 pt-12 border-t border-white/[0.06] reveal" aria-labelledby="skills-heading">
+        <h3 id="skills-heading" class="text-xl font-bold text-white mb-1">Tech stack</h3>
+        <p class="text-sm text-slate-500 font-light mb-8">Same organized view as my original portfolio — grouped by discipline, with the tools I reach for daily.</p>
+
+        <div class="skills-category">
+          <p class="skills-category-label">Frontend</p>
+          <div class="skills-grid" role="list">
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#61dafb"></span>React.js</span>
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#f7df1e"></span>JavaScript (ES6+)</span>
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#e34f26"></span>HTML5</span>
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#1572b6"></span>CSS3</span>
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#06b6d4"></span>Tailwind CSS</span>
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#7952b3"></span>Bootstrap</span>
+          </div>
+        </div>
+
+        <div class="skills-category">
+          <p class="skills-category-label">Backend</p>
+          <div class="skills-grid" role="list">
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#ff2d20"></span>Laravel</span>
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#777bb4"></span>PHP</span>
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#68a063"></span>Node.js</span>
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#333"></span>Express.js</span>
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#ff9900"></span>REST APIs</span>
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#21759b"></span>WordPress</span>
+          </div>
+        </div>
+
+        <div class="skills-category">
+          <p class="skills-category-label">AI / Data</p>
+          <div class="skills-grid" role="list">
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#10a37f"></span>OpenAI API</span>
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#00758f"></span>MySQL</span>
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#4db33d"></span>MongoDB</span>
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#fbbc04"></span>Google APIs</span>
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#e10098"></span>GraphQL (Chart.js)</span>
+          </div>
+        </div>
+
+        <div class="skills-category">
+          <p class="skills-category-label">DevOps &amp; Tools</p>
+          <div class="skills-grid" role="list">
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#f05032"></span>Git</span>
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#ff6c37"></span>Postman</span>
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#ff4a00"></span>Zapier</span>
+            <span class="skill-tag" role="listitem"><span class="skill-dot" style="background:#6366f1"></span>Make</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="py-20 lg:py-28 px-5 lg:px-8 max-w-6xl mx-auto" aria-labelledby="projects-heading">
+      <p class="font-mono text-xs text-indigo-400 uppercase tracking-[0.2em] mb-3 reveal">// 02 — projects</p>
+      <h2 id="projects-heading" class="text-3xl lg:text-4xl font-bold tracking-tight mb-3 reveal">Things I've built.</h2>
+      <p class="text-slate-400 max-w-xl font-light reveal">A selection of products and systems I've developed — from large-scale CRM platforms to freelance client work.</p>
+
+      <div class="inline-flex gap-1 p-1 mt-8 rounded-full glass" role="tablist" aria-label="Project categories">
+        <button type="button" class="project-tab active px-5 py-2 rounded-full font-mono text-xs uppercase tracking-wider transition-all" role="tab" aria-selected="true" aria-controls="panel-professional" id="tab-professional" data-panel="panel-professional">Professional</button>
+        <button type="button" class="project-tab px-5 py-2 rounded-full font-mono text-xs uppercase tracking-wider text-slate-500 transition-all" role="tab" aria-selected="false" aria-controls="panel-freelance" id="tab-freelance" data-panel="panel-freelance">Freelance</button>
+      </div>
+
+      <!-- Professional -->
+      <div id="panel-professional" class="project-panel mt-10" role="tabpanel" aria-labelledby="tab-professional">
+        <p class="font-mono text-xs text-slate-500 uppercase tracking-widest mb-6 reveal">Core product and company-impact work</p>
+        <div class="grid lg:grid-cols-2 gap-5">
+
+          <article class="project-card lg:col-span-2 gradient-border p-6 lg:p-8 reveal">
+            <span class="font-mono text-[0.65rem] text-slate-500 tracking-widest">01 — featured</span>
+            <h3 class="text-xl font-bold mt-2 mb-4">EduCtrl Consultancy</h3>
+            <div class="grid md:grid-cols-[1fr_auto] gap-6">
+              <div>
+                <p class="text-xs font-mono text-cyan-400/90 uppercase tracking-wider mb-2">Problem solved</p>
+                <p class="text-sm text-slate-400 leading-relaxed">Developed and maintained CRM modules for lead, student, application, staff, agent, and invoice management for consultancy operations. Added OpenAI chatbot and Firebase Web Push notifications, improving user engagement by 30%.</p>
+              </div>
+              <div>
+                <p class="text-xs font-mono text-indigo-400/90 uppercase tracking-wider mb-2">Tech stack</p>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="tech-badge">Laravel</span><span class="tech-badge">PHP</span><span class="tech-badge">MySQL</span>
+                  <span class="tech-badge">WhatsApp API</span><span class="tech-badge">Firebase</span><span class="tech-badge">OpenAI</span>
+                  <span class="tech-badge">Zapier</span><span class="tech-badge">REST APIs</span><span class="tech-badge">WATI</span>
+                </div>
+              </div>
+            </div>
+            <a href="https://www.eductrl.com/consultancy" class="action-link inline-flex items-center gap-2 mt-6 px-4 py-2 rounded-lg font-mono text-xs text-indigo-300 border border-indigo-500/40 bg-indigo-500/10" target="_blank" rel="noopener noreferrer">
+              Live Demo — Sash Info Services <span aria-hidden="true">↗</span>
+            </a>
+          </article>
+
+          <article class="project-card gradient-border p-6 reveal">
+            <span class="font-mono text-[0.65rem] text-slate-500">02</span>
+            <h3 class="text-lg font-bold mt-2 mb-3">EduCtrl ClientCtrl</h3>
+            <p class="text-xs font-mono text-cyan-400/80 uppercase mb-1">Problem solved</p>
+            <p class="text-sm text-slate-400 mb-4 leading-relaxed">Built secure REST APIs and role-based access control for client-side CRM workflows. Integrated third-party services across SMS, WhatsApp, payment, and call channels.</p>
+            <p class="text-xs font-mono text-indigo-400/80 uppercase mb-2">Tech stack</p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="tech-badge">Laravel</span><span class="tech-badge">REST APIs</span><span class="tech-badge">RBAC</span><span class="tech-badge">MySQL</span><span class="tech-badge">Interakt</span><span class="tech-badge">Exotel</span>
+            </div>
+            <a href="https://clientctrl.app/" class="action-link inline-flex items-center gap-2 px-3 py-1.5 rounded-lg font-mono text-xs text-cyan-300 border border-cyan-500/30 bg-cyan-500/10" target="_blank" rel="noopener noreferrer">Live Demo ↗</a>
+          </article>
+
+          <article class="project-card gradient-border p-6 reveal">
+            <span class="font-mono text-[0.65rem] text-slate-500">03</span>
+            <h3 class="text-lg font-bold mt-2 mb-3">EduCtrl CMS</h3>
+            <p class="text-xs font-mono text-cyan-400/80 uppercase mb-1">Problem solved</p>
+            <p class="text-sm text-slate-400 mb-4 leading-relaxed">Implemented CRM CMS capabilities with automation workflows using Zapier, Make, and Pabbly Connect. Integrated Google SMTP, multi-client support, and platform sync triggers.</p>
+            <p class="text-xs font-mono text-indigo-400/80 uppercase mb-2">Tech stack</p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="tech-badge">Laravel</span><span class="tech-badge">CMS</span><span class="tech-badge">Google SMTP</span><span class="tech-badge">Automation</span><span class="tech-badge">Make</span><span class="tech-badge">Pabbly</span><span class="tech-badge">Aisensy</span>
+            </div>
+            <a href="https://www.eductrl.com/eductrl-cms" class="action-link inline-flex items-center gap-2 px-3 py-1.5 rounded-lg font-mono text-xs text-cyan-300 border border-cyan-500/30 bg-cyan-500/10" target="_blank" rel="noopener noreferrer">Live Demo ↗</a>
+          </article>
+
+          <article class="project-card gradient-border p-6 reveal">
+            <span class="font-mono text-[0.65rem] text-slate-500">04</span>
+            <h3 class="text-lg font-bold mt-2 mb-3">Gain2U — Real Estate Platform</h3>
+            <p class="text-xs font-mono text-cyan-400/80 uppercase mb-1">Problem solved</p>
+            <p class="text-sm text-slate-400 mb-4 leading-relaxed">Real estate listing and lead management with SEO-friendly URLs, social login, payment gateway, admin dashboards, property approvals, and automated WhatsApp and email communication.</p>
+            <p class="text-xs font-mono text-indigo-400/80 uppercase mb-2">Tech stack</p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="tech-badge">Laravel</span><span class="tech-badge">MySQL</span><span class="tech-badge">WhatsApp API</span><span class="tech-badge">Payment Gateway</span>
+            </div>
+            <a href="https://gain2umatrix.com/" class="action-link inline-flex items-center gap-2 px-3 py-1.5 rounded-lg font-mono text-xs text-cyan-300 border border-cyan-500/30 bg-cyan-500/10" target="_blank" rel="noopener noreferrer">Live Demo ↗</a>
+          </article>
+
+          <article class="project-card gradient-border p-6 reveal">
+            <span class="font-mono text-[0.65rem] text-slate-500">05</span>
+            <h3 class="text-lg font-bold mt-2 mb-3">Clickashare — Affiliate Marketing</h3>
+            <p class="text-xs font-mono text-cyan-400/80 uppercase mb-1">Problem solved</p>
+            <p class="text-sm text-slate-400 mb-4 leading-relaxed">Led the full SDLC as Project Lead with a 3-member team. Finalized SRS documentation and drove feature development for an affiliate marketing automation platform.</p>
+            <p class="text-xs font-mono text-indigo-400/80 uppercase mb-2">Tech stack</p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="tech-badge">Laravel</span><span class="tech-badge">PHP</span><span class="tech-badge">MySQL</span><span class="tech-badge">REST APIs</span>
+            </div>
+            <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg font-mono text-xs text-slate-500 border border-white/10">Professional project</span>
+          </article>
+
+          <article class="project-card gradient-border p-6 reveal">
+            <span class="font-mono text-[0.65rem] text-slate-500">06</span>
+            <h3 class="text-lg font-bold mt-2 mb-3">SmartERP — School Management</h3>
+            <p class="text-xs font-mono text-cyan-400/80 uppercase mb-1">Problem solved</p>
+            <p class="text-sm text-slate-400 mb-4 leading-relaxed">Contributed core modules — Attendance, Fees, Salaries, and Results — to a multi-institution school ERP platform used across educational organizations in Bhopal.</p>
+            <p class="text-xs font-mono text-indigo-400/80 uppercase mb-2">Tech stack</p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="tech-badge">PHP</span><span class="tech-badge">MySQL</span><span class="tech-badge">Bootstrap</span>
+            </div>
+            <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg font-mono text-xs text-slate-500 border border-white/10">Smart Educations</span>
+          </article>
+
+          <article class="project-card gradient-border p-6 reveal">
+            <span class="font-mono text-[0.65rem] text-slate-500">07 — personal</span>
+            <h3 class="text-lg font-bold mt-2 mb-3">URL Shortener App</h3>
+            <p class="text-xs font-mono text-cyan-400/80 uppercase mb-1">Problem solved</p>
+            <p class="text-sm text-slate-400 mb-4 leading-relaxed">Full MERN-stack URL shortener with unique short code generation, click analytics, copy-to-clipboard, link expiry, and real-time response display.</p>
+            <p class="text-xs font-mono text-indigo-400/80 uppercase mb-2">Tech stack</p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="tech-badge">React.js</span><span class="tech-badge">Node.js</span><span class="tech-badge">Express.js</span><span class="tech-badge">MongoDB</span><span class="tech-badge">Tailwind CSS</span>
+            </div>
+            <a href="https://github.com/anurag-verma/url_shortner" class="action-link inline-flex items-center gap-2 px-3 py-1.5 rounded-lg font-mono text-xs text-indigo-300 border border-indigo-500/40 bg-indigo-500/10" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          </article>
+        </div>
+      </div>
+
+      <!-- Freelance -->
+      <div id="panel-freelance" class="project-panel hidden mt-10" role="tabpanel" aria-labelledby="tab-freelance" hidden>
+        <p class="font-mono text-xs text-slate-500 uppercase tracking-widest mb-6 reveal">Client-focused delivery across industries</p>
+        <div class="grid lg:grid-cols-2 gap-5">
+
+          <article class="project-card lg:col-span-2 gradient-border p-6 lg:p-8 reveal">
+            <span class="font-mono text-[0.65rem] text-slate-500">F01 — featured · Full Stack Laravel Developer</span>
+            <h3 class="text-xl font-bold mt-2 mb-4">FindAndStudy — Education Portal</h3>
+            <p class="text-xs font-mono text-cyan-400/80 uppercase mb-1">Problem solved</p>
+            <p class="text-sm text-slate-400 mb-4 leading-relaxed">Portal.FindAndStudy.com is a comprehensive educational services web portal built with Laravel, designed to connect students with accurate information about study programs, scholarships, and international education opportunities.</p>
+            <p class="text-xs font-mono text-indigo-400/80 uppercase mb-2">Tech stack</p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="tech-badge">Laravel</span><span class="tech-badge">Bootstrap</span><span class="tech-badge">MySQL</span><span class="tech-badge">jQuery</span><span class="tech-badge">Responsive Design</span>
+            </div>
+            <a href="https://portal.findandstudy.com" class="action-link inline-flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-xs text-cyan-300 border border-cyan-500/30 bg-cyan-500/10" target="_blank" rel="noopener noreferrer">Live Demo — portal.findandstudy.com ↗</a>
+          </article>
+
+          <article class="project-card gradient-border p-6 reveal">
+            <span class="font-mono text-[0.65rem] text-slate-500">F02 · Full Stack Laravel Developer</span>
+            <h3 class="text-lg font-bold mt-2 mb-3">Abroadiz — Study Abroad Portal</h3>
+            <p class="text-xs font-mono text-cyan-400/80 uppercase mb-1">Problem solved</p>
+            <p class="text-sm text-slate-400 mb-4 leading-relaxed">A robust educational guidance and international study resource portal helping students explore global study opportunities, scholarships, and career pathways abroad.</p>
+            <p class="text-xs font-mono text-indigo-400/80 uppercase mb-2">Tech stack</p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="tech-badge">Laravel</span><span class="tech-badge">MySQL</span><span class="tech-badge">jQuery</span><span class="tech-badge">CSS3</span><span class="tech-badge">Bootstrap</span>
+            </div>
+            <a href="https://abroadiz.com" class="action-link inline-flex items-center gap-2 px-3 py-1.5 rounded-lg font-mono text-xs text-cyan-300 border border-cyan-500/30 bg-cyan-500/10" target="_blank" rel="noopener noreferrer">Live Demo ↗</a>
+          </article>
+
+          <article class="project-card gradient-border p-6 reveal">
+            <span class="font-mono text-[0.65rem] text-slate-500">F03 · Developer</span>
+            <h3 class="text-lg font-bold mt-2 mb-3">Siramed Staff — Healthcare Recruitment</h3>
+            <p class="text-xs font-mono text-cyan-400/80 uppercase mb-1">Problem solved</p>
+            <p class="text-sm text-slate-400 mb-4 leading-relaxed">A clean, modern, and fully responsive website for a healthcare recruitment and staffing service. Structured to clearly communicate staffing solutions and contact channels.</p>
+            <p class="text-xs font-mono text-indigo-400/80 uppercase mb-2">Tech stack</p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="tech-badge">WordPress</span><span class="tech-badge">WordPress Theme</span><span class="tech-badge">HTML5</span><span class="tech-badge">CSS</span>
+            </div>
+            <a href="https://siramedstaff.com" class="action-link inline-flex items-center gap-2 px-3 py-1.5 rounded-lg font-mono text-xs text-cyan-300 border border-cyan-500/30 bg-cyan-500/10" target="_blank" rel="noopener noreferrer">Live Demo ↗</a>
+          </article>
+
+          <article class="project-card gradient-border p-6 reveal">
+            <span class="font-mono text-[0.65rem] text-slate-500">F04 · Developer</span>
+            <h3 class="text-lg font-bold mt-2 mb-3">Cloud9 IT Consulting</h3>
+            <p class="text-xs font-mono text-cyan-400/80 uppercase mb-1">Problem solved</p>
+            <p class="text-sm text-slate-400 mb-4 leading-relaxed">Official company website for Cloud9 IT Consulting — a clean, modern, fully responsive digital presence communicating IT consulting, software strategy, and technology solutions.</p>
+            <p class="text-xs font-mono text-indigo-400/80 uppercase mb-2">Tech stack</p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="tech-badge">WordPress</span><span class="tech-badge">HTML5</span><span class="tech-badge">CSS</span><span class="tech-badge">Figma</span>
+            </div>
+            <a href="https://c9its.com" class="action-link inline-flex items-center gap-2 px-3 py-1.5 rounded-lg font-mono text-xs text-cyan-300 border border-cyan-500/30 bg-cyan-500/10" target="_blank" rel="noopener noreferrer">Live Demo ↗</a>
+          </article>
+
+          <article class="project-card gradient-border p-6 reveal">
+            <span class="font-mono text-[0.65rem] text-slate-500">F05 · Developer</span>
+            <h3 class="text-lg font-bold mt-2 mb-3">Subholina Sen — Celebrity Website</h3>
+            <p class="text-xs font-mono text-cyan-400/80 uppercase mb-1">Problem solved</p>
+            <p class="text-sm text-slate-400 mb-4 leading-relaxed">Personal website and landing page for actress Subholina Sen. Full WordPress build with social plugin integrations, responsive design, and custom web components.</p>
+            <p class="text-xs font-mono text-indigo-400/80 uppercase mb-2">Tech stack</p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="tech-badge">WordPress</span><span class="tech-badge">PHP</span><span class="tech-badge">Elementor</span><span class="tech-badge">CSS3</span><span class="tech-badge">Adobe Photoshop</span>
+            </div>
+            <a href="https://subholinasen.in" class="action-link inline-flex items-center gap-2 px-3 py-1.5 rounded-lg font-mono text-xs text-cyan-300 border border-cyan-500/30 bg-cyan-500/10" target="_blank" rel="noopener noreferrer">Live Demo ↗</a>
+          </article>
+
+          <article class="project-card gradient-border p-6 reveal">
+            <span class="font-mono text-[0.65rem] text-slate-500">F06 · Developer</span>
+            <h3 class="text-lg font-bold mt-2 mb-3">Ummeed — NGO Website</h3>
+            <p class="text-xs font-mono text-cyan-400/80 uppercase mb-1">Problem solved</p>
+            <p class="text-sm text-slate-400 mb-4 leading-relaxed">Website for Ummeed.ngo, an NGO working towards helping people affected by medical and societal challenges. Built on WordPress with an integrated payment gateway for online donations.</p>
+            <p class="text-xs font-mono text-indigo-400/80 uppercase mb-2">Tech stack</p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="tech-badge">WordPress</span><span class="tech-badge">HTML5</span><span class="tech-badge">CSS3</span><span class="tech-badge">Payment Gateway</span><span class="tech-badge">Adobe Photoshop</span>
+            </div>
+            <a href="https://ummeed.ngo" class="action-link inline-flex items-center gap-2 px-3 py-1.5 rounded-lg font-mono text-xs text-cyan-300 border border-cyan-500/30 bg-cyan-500/10" target="_blank" rel="noopener noreferrer">Live Demo ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="py-20 lg:py-28 px-5 lg:px-8 max-w-6xl mx-auto border-t border-white/[0.06] bg-obsidian-50/50" aria-labelledby="experience-heading">
+      <p class="font-mono text-xs text-indigo-400 uppercase tracking-[0.2em] mb-3 reveal">// 03 — experience</p>
+      <h2 id="experience-heading" class="text-3xl lg:text-4xl font-bold tracking-tight mb-10 reveal">Where I've worked.</h2>
+
+      <div class="grid lg:grid-cols-[220px_1fr] gap-8 lg:gap-12">
+        <!-- Tab list (desktop) / accordion triggers -->
+        <div class="flex lg:flex-col gap-2 overflow-x-auto pb-2 lg:pb-0" role="tablist" aria-label="Work experience">
+          <button type="button" class="exp-tab active shrink-0 text-left px-4 py-3 rounded-xl glass font-mono text-xs transition-all" role="tab" aria-selected="true" aria-controls="exp-0" id="exp-tab-0" data-exp="0">
+            <span class="block text-indigo-400 mb-1">2021 — 2025</span>
+            Sash Info Services
+          </button>
+          <button type="button" class="exp-tab shrink-0 text-left px-4 py-3 rounded-xl glass font-mono text-xs text-slate-500 transition-all" role="tab" aria-selected="false" aria-controls="exp-1" id="exp-tab-1" data-exp="1">
+            <span class="block text-slate-600 mb-1">2019 — 2021</span>
+            Smart Educations
+          </button>
+          <button type="button" class="exp-tab shrink-0 text-left px-4 py-3 rounded-xl glass font-mono text-xs text-slate-500 transition-all" role="tab" aria-selected="false" aria-controls="exp-2" id="exp-tab-2" data-exp="2">
+            <span class="block text-slate-600 mb-1">2018 — 2019</span>
+            SEOWave Solutions
+          </button>
+        </div>
+
+        <!-- Vertical timeline + panels -->
+        <div class="relative timeline-track pl-8">
+          <div id="exp-0" class="exp-panel active gradient-border p-6 lg:p-8 reveal" role="tabpanel" aria-labelledby="exp-tab-0">
+            <p class="font-mono text-xs text-slate-500 mb-2">Feb 2021 — Mar 2025 · 4 yrs 1 mo</p>
+            <h3 class="text-xl font-bold text-white">Senior Web Developer</h3>
+            <p class="text-indigo-300 text-sm mt-1 mb-4">Sash Info Services · Bengaluru</p>
+            <ul class="text-sm text-slate-400 space-y-2 list-disc pl-5 leading-relaxed">
+              <li>Built and maintained multi-module CRM systems (EduCtrl) covering leads, students, applications, staff, agents, and invoices.</li>
+              <li>Integrated WhatsApp APIs (WATI, Aisensy, Interakt), Firebase, Zadarma, Exotel, Google SMTP, and payment gateways.</li>
+              <li>Designed automation workflows using Zapier, Make, and Pabbly Connect across Facebook, Email, Google Sheets, and lead forms.</li>
+              <li>Added AI chatbot (OpenAI) and Firebase push notifications — improved engagement by 30%.</li>
+              <li>Built secure REST APIs with role-based access control across multiple client environments.</li>
+              <li>Led migration of iifls.com from WordPress to Laravel; integrated Google Calendar and WATI for the IIFL student portal.</li>
+              <li>Served as Project Lead on Clickashare, overseeing the full SDLC with a 3-member team.</li>
+            </ul>
+          </div>
+
+          <div id="exp-1" class="exp-panel gradient-border p-6 lg:p-8 reveal" role="tabpanel" aria-labelledby="exp-tab-1" hidden>
+            <p class="font-mono text-xs text-slate-500 mb-2">May 2019 — Jan 2021 · 1 yr 9 mos</p>
+            <h3 class="text-xl font-bold text-white">Web Developer</h3>
+            <p class="text-indigo-300 text-sm mt-1 mb-4">Smart Educations · Bhopal</p>
+            <ul class="text-sm text-slate-400 space-y-2 list-disc pl-5 leading-relaxed">
+              <li>Developed core SmartERP modules: Attendance, Fees, Salaries, and Results.</li>
+              <li>Delivered custom client solutions and ongoing maintenance updates.</li>
+            </ul>
+          </div>
+
+          <div id="exp-2" class="exp-panel gradient-border p-6 lg:p-8 reveal" role="tabpanel" aria-labelledby="exp-tab-2" hidden>
+            <p class="font-mono text-xs text-slate-500 mb-2">Nov 2018 — Apr 2019 · 6 mos</p>
+            <h3 class="text-xl font-bold text-white">Web Developer</h3>
+            <p class="text-indigo-300 text-sm mt-1 mb-4">SEOWave Solutions · Bhopal</p>
+            <ul class="text-sm text-slate-400 space-y-2 list-disc pl-5 leading-relaxed">
+              <li>Designed and developed WordPress and custom CMS-based websites for multiple clients.</li>
+              <li>Mentored junior developers and assisted with project deployments.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-20 lg:py-28 px-5 lg:px-8 max-w-6xl mx-auto border-t border-white/[0.06] text-center" aria-labelledby="contact-heading">
+      <p class="font-mono text-xs text-indigo-400 uppercase tracking-[0.2em] mb-3 reveal">// 04 — contact</p>
+      <h2 id="contact-heading" class="text-3xl lg:text-4xl font-bold tracking-tight mb-4 reveal">Let's build something great.</h2>
+      <p class="text-slate-400 max-w-lg mx-auto font-light reveal">Open to full-time roles, freelance projects, or a conversation about Laravel, AI integrations, or automation workflows.</p>
+      <a href="mailto:anuragv26@gmail.com" class="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-lg bg-indigo-500 text-white font-medium hover:bg-indigo-400 transition-all hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 reveal">
+        anuragv26@gmail.com →
+      </a>
+      <div class="flex flex-wrap justify-center gap-3 mt-10 reveal" role="list" aria-label="Social and contact links">
+        <a href="https://linkedin.com" class="glass inline-flex items-center gap-2 px-4 py-2.5 rounded-lg font-mono text-xs text-slate-400 hover:text-white hover:border-white/20 transition-all" target="_blank" rel="noopener noreferrer" role="listitem">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com" class="glass inline-flex items-center gap-2 px-4 py-2.5 rounded-lg font-mono text-xs text-slate-400 hover:text-white transition-all" target="_blank" rel="noopener noreferrer" role="listitem">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://wa.me/918109958566" class="glass inline-flex items-center gap-2 px-4 py-2.5 rounded-lg font-mono text-xs text-slate-400 hover:text-white transition-all" target="_blank" rel="noopener noreferrer" role="listitem">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.86 11.86 0 0012.06 0C5.52 0 .2 5.31.2 11.84c0 2.09.55 4.14 1.58 5.94L0 24l6.4-1.67a11.88 11.88 0 005.67 1.45h.01c6.54 0 11.86-5.31 11.86-11.84 0-3.16-1.24-6.13-3.42-8.46zM12.08 21.8h-.01a9.94 9.94 0 01-5.06-1.39l-.36-.21-3.8 1 1.01-3.7-.24-.38a9.9 9.9 0 01-1.52-5.28C2.1 6.4 6.54 1.98 12.05 1.98a9.9 9.9 0 017.03 2.9 9.84 9.84 0 012.9 7.02c0 5.45-4.44 9.9-9.9 9.9zm5.43-7.42c-.3-.15-1.77-.87-2.04-.97-.27-.1-.46-.15-.65.15-.2.3-.75.97-.92 1.17-.17.2-.34.22-.64.07-.3-.15-1.26-.46-2.4-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.5.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.65-1.57-.9-2.15-.23-.55-.47-.47-.65-.48h-.55c-.2 0-.52.08-.8.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.06 2.88 1.21 3.08.15.2 2.08 3.18 5.04 4.46.7.3 1.24.48 1.66.61.7.22 1.33.19 1.83.11.56-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.08-.12-.27-.2-.57-.35z"/></svg>
+          WhatsApp
+        </a>
+        <a href="tel:+918109958566" class="glass inline-flex items-center gap-2 px-4 py-2.5 rounded-lg font-mono text-xs text-slate-400 hover:text-white transition-all" role="listitem">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          Call Me
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <button type="button" id="backToTop" class="fixed right-5 bottom-20 lg:bottom-6 z-[90] w-11 h-11 rounded-full glass flex items-center justify-center text-slate-300 opacity-0 invisible translate-y-2 transition-all hover:bg-indigo-500 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400" aria-label="Back to top">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <footer class="border-t border-white/[0.06] py-6 text-center" role="contentinfo">
+    <p class="font-mono text-xs text-slate-500 tracking-wide">© 2026 Anurag Verma. All rights reserved.</p>
+  </footer>
+
+  <script>
+    (function () {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!prefersReduced) {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => entry.target.classList.add('visible'), i * 60);
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+      } else {
+        document.querySelectorAll('.reveal').forEach((el) => el.classList.add('visible'));
+      }
+
+      const projectTabs = document.querySelectorAll('.project-tab');
+      const projectPanels = document.querySelectorAll('.project-panel');
+      projectTabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const panelId = tab.getAttribute('aria-controls');
+          projectTabs.forEach((t) => {
+            const active = t === tab;
+            t.classList.toggle('active', active);
+            t.setAttribute('aria-selected', String(active));
+          });
+          projectPanels.forEach((panel) => {
+            const show = panel.id === panelId;
+            panel.classList.toggle('hidden', !show);
+            panel.hidden = !show;
+          });
+        });
+      });
+
+      const expTabs = document.querySelectorAll('.exp-tab');
+      const expPanels = document.querySelectorAll('.exp-panel');
+      expTabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const idx = tab.dataset.exp;
+          expTabs.forEach((t) => {
+            const active = t === tab;
+            t.classList.toggle('active', active);
+            t.setAttribute('aria-selected', String(active));
+          });
+          expPanels.forEach((panel, i) => {
+            const active = String(i) === idx;
+            panel.classList.toggle('active', active);
+            panel.hidden = !active;
+          });
+        });
+      });
+
+      const menuToggle = document.getElementById('menuToggle');
+      const drawer = document.getElementById('mobileDrawer');
+      const drawerPanel = document.getElementById('drawerPanel');
+      const backdrop = document.getElementById('drawerBackdrop');
+      const iconOpen = document.getElementById('menuIconOpen');
+      const iconClose = document.getElementById('menuIconClose');
+
+      function setDrawer(open) {
+        menuToggle.setAttribute('aria-expanded', String(open));
+        drawer.setAttribute('aria-hidden', String(!open));
+        drawer.classList.toggle('pointer-events-none', !open);
+        drawer.classList.toggle('opacity-0', !open);
+        drawer.classList.toggle('opacity-100', open);
+        drawerPanel.classList.toggle('translate-x-full', !open);
+        drawerPanel.classList.toggle('translate-x-0', open);
+        iconOpen.classList.toggle('hidden', open);
+        iconClose.classList.toggle('hidden', !open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      }
+
+      menuToggle.addEventListener('click', () => setDrawer(menuToggle.getAttribute('aria-expanded') !== 'true'));
+      backdrop.addEventListener('click', () => setDrawer(false));
+      document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+        link.addEventListener('click', () => setDrawer(false));
+      });
+
+      const backToTop = document.getElementById('backToTop');
+      const onScroll = () => {
+        const show = window.scrollY > 400;
+        backToTop.classList.toggle('opacity-0', !show);
+        backToTop.classList.toggle('invisible', !show);
+        backToTop.classList.toggle('opacity-100', show);
+        backToTop.classList.toggle('translate-y-0', show);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' }));
+
+      const bottomLinks = document.querySelectorAll('.bottom-nav-link');
+      const sections = ['hero', 'projects', 'experience', 'contact'].map((id) => document.getElementById(id)).filter(Boolean);
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            bottomLinks.forEach((link) => {
+              const active = link.dataset.section === id;
+              link.classList.toggle('text-cyan-400', active);
+              link.classList.toggle('text-slate-500', !active);
+            });
+          }
+        });
+      }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+      sections.forEach((s) => sectionObserver.observe(s));
+    })();
+  </script>
+</body>
+</html>
