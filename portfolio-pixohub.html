@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Anurag Verma — Full Stack Laravel Developer</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23ff4d00'/%3E%3Cstop offset='100%25' stop-color='%23ffd600'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%230a0a0a'/%3E%3Cpath d='M32 13l14 38h-8.4l-3.1-8.8H21.5L18.4 51H10L24 13h8zm0 11.4l-7.2 20.1h14.4L32 24.4z' fill='url(%23g)'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,23 +27,13 @@
     --radius-pill: 999px;
     --container: min(1480px, calc(100% - 5rem));
     --shadow: 0 20px 60px rgba(0,0,0,0.12);
-    --nav-bar-h: 3.5rem;
-    --nav-safe-top: env(safe-area-inset-top, 0px);
-    --nav-gutter: max(1.25rem, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
-    --nav-total-h: calc(var(--nav-bar-h) + var(--nav-safe-top));
   }
-  html {
-    scroll-behavior: smooth;
-    overflow-x: clip;
-    scroll-padding-top: var(--nav-total-h);
-  }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
   body {
     font-family: 'Inter', sans-serif;
     background: var(--dark);
     color: var(--white);
     -webkit-font-smoothing: antialiased;
-    overflow-x: clip;
-    max-width: 100%;
   }
   body.is-loading { overflow: hidden; }
   .container { width: var(--container); margin: 0 auto; }
@@ -56,32 +46,30 @@
     transition: width 0.08s linear;
   }
 
-  /* NAV — fixed bar height on mobile; no backdrop-filter (traps fixed drawer) */
-  .site-header {
+  /* NAV */
+  nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 500;
     padding: 1.1rem 0;
-    background: rgba(10,10,10,0.94);
+    background: rgba(10,10,10,0.82);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     border-bottom: 1px solid var(--border-dark);
-    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-    overflow: visible;
-    isolation: isolate;
+    transition: padding 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
   }
-  .site-header.is-scrolled {
-    background: rgba(10,10,10,0.98);
+  nav.is-scrolled {
+    padding: 0.65rem 0;
+    background: rgba(10,10,10,0.95);
     border-color: rgba(255,255,255,0.06);
     box-shadow: 0 12px 40px rgba(0,0,0,0.35);
   }
-  .site-header.menu-open { z-index: 510; }
   .nav-inner {
     width: var(--container); margin: 0 auto;
     display: flex; align-items: center; justify-content: space-between;
     gap: 1.5rem; min-height: 2.75rem;
     position: relative;
-    overflow: visible;
   }
-  .nav-logo { order: 1; }
-  .nav-links { order: 2; }
-  .nav-end { order: 3; }
+  .nav-links { display: flex; align-items: center; gap: clamp(1.35rem, 2.2vw, 2.1rem); list-style: none; margin-left: auto; }
   .nav-logo {
     font-family: 'Instrument Sans', sans-serif;
     font-weight: 700; font-size: 1.35rem; line-height: 1;
@@ -93,12 +81,9 @@
   .nav-end {
     display: flex; align-items: center; gap: 1rem; flex-shrink: 0;
   }
-  .nav-links {
-    display: flex; align-items: center;
-    gap: clamp(1.35rem, 2.2vw, 2.1rem);
-    list-style: none; margin-left: auto;
-  }
   .nav-links li { display: flex; align-items: center; }
+  .nav-links li.nav-drawer-label,
+  .nav-links li.nav-mobile-cta { display: none !important; }
   .nav-links a {
     font-size: 0.82rem; font-weight: 500; color: var(--text-light);
     text-decoration: none; transition: color 0.2s;
@@ -137,11 +122,10 @@
     box-shadow: 0 12px 32px rgba(255,77,0,0.38);
   }
   .nav-toggle {
-    display: none; background: none; border: none; color: var(--white);
-    cursor: pointer; padding: 0; line-height: 0;
-    flex-shrink: 0; position: relative; z-index: 2;
+    display: none; background: none; border: none; color: #ffffff;
+    cursor: pointer; padding: 0.5rem; line-height: 0;
+    flex-shrink: 0; position: relative; z-index: 503;
     -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
   }
   .nav-toggle-icon {
     display: flex; flex-direction: column; justify-content: center;
@@ -161,7 +145,7 @@
     transform: translateY(-0.5rem) rotate(-45deg);
   }
   .nav-backdrop {
-    position: fixed; inset: 0; z-index: 480;
+    position: fixed; inset: 0; z-index: 501;
     background: rgba(0,0,0,0.55);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
@@ -292,14 +276,14 @@
     flex-wrap: nowrap;
     white-space: nowrap;
   }
+  .typewriter-role {
+    display: inline;
+  }
   .typewriter-prefix {
     color: rgba(255,255,255,0.45);
     font-weight: 600;
     margin-right: 0.15em;
     flex-shrink: 0;
-  }
-  .typewriter-role {
-    display: inline;
   }
   .typewriter-text {
     color: var(--accent);
@@ -985,165 +969,71 @@
     background: var(--light); text-transform: uppercase;
   }
   .redesign-compare {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.6rem;
-    align-items: start;
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: center;
   }
-  .redesign-thumb {
-    display: block;
-    width: 100%;
-    padding: 0;
+  .redesign-panel { min-width: 0; }
+  .redesign-label {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 0.65rem;
+  }
+  .redesign-label--before { color: var(--text-muted); }
+  .redesign-label--after { color: var(--accent); }
+  .redesign-label-dot {
+    width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+  }
+  .redesign-label--before .redesign-label-dot { background: #9ca3af; }
+  .redesign-label--after .redesign-label-dot { background: var(--accent); }
+  .redesign-arrow {
+    width: 2.25rem; height: 2.25rem; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--text-dark); color: var(--white);
+    font-size: 0.95rem; flex-shrink: 0;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+  .redesign-shot {
+    aspect-ratio: 16 / 10; border-radius: 0.75rem; overflow: hidden;
     border: 1px solid var(--border-light);
-    border-radius: 0.65rem;
-    overflow: hidden;
-    background: #f5f2eb;
-    cursor: pointer;
-    text-align: left;
-    -webkit-tap-highlight-color: transparent;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
   }
-  .redesign-thumb:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+  .redesign-shot__bar {
+    display: flex; align-items: center; gap: 0.35rem;
+    padding: 0.45rem 0.65rem; border-bottom: 1px solid rgba(0,0,0,0.06);
   }
-  .redesign-thumb:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
+  .redesign-shot__dot { width: 6px; height: 6px; border-radius: 50%; }
+  .redesign-shot__url {
+    flex: 1; margin-left: 0.35rem; height: 0.55rem; border-radius: 999px;
+    max-width: 55%;
   }
-  .redesign-thumb__label {
-    display: block;
-    padding: 0.28rem 0.55rem;
-    font-size: 0.54rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    background: rgba(0,0,0,0.04);
-    border-bottom: 1px solid var(--border-light);
-    color: var(--text-muted);
-  }
-  .redesign-thumb--after .redesign-thumb__label {
-    color: var(--accent);
-    background: rgba(255,77,0,0.06);
-  }
-  .redesign-thumb__frame {
-    display: block;
-    position: relative;
-    width: 100%;
-    max-height: 608px;
-    overflow: hidden;
-    background: #fff;
-  }
-  .redesign-thumb__frame img {
-    width: 100%;
-    height: auto;
-    max-width: none;
-    display: block;
-    pointer-events: none;
-  }
-
-  /* Screenshot viewer popup */
-  .shot-viewer {
-    position: fixed;
-    inset: 0;
-    z-index: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-  }
-  .shot-viewer.is-open {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-  }
-  .shot-viewer__backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.88);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-  .shot-viewer__panel {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    width: min(96vw, 1300px);
-    max-height: min(92dvh, 900px);
-    background: #111;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 0.85rem;
-    overflow: hidden;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.45);
-  }
-  .shot-viewer__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    flex-shrink: 0;
-  }
-  .shot-viewer__caption {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: rgba(255,255,255,0.9);
-    min-width: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .shot-viewer__close {
-    flex-shrink: 0;
-    padding: 0.45rem 0.85rem;
-    border-radius: 0.45rem;
-    border: 1px solid rgba(255,255,255,0.18);
-    background: rgba(255,255,255,0.08);
-    color: #fff;
-    font-size: 0.75rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
-  .shot-viewer__close:hover { background: rgba(255,255,255,0.14); }
-  .shot-viewer__stage {
-    flex: 1;
-    min-height: 0;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    background: #0a0a0a;
-    cursor: grab;
-    touch-action: none;
-    user-select: none;
-  }
-  .shot-viewer__stage.is-panning { cursor: grabbing; }
-  .shot-viewer__img {
-    display: block;
-    max-width: 100%;
-    width: auto;
-    height: auto;
-    transform-origin: center center;
-    will-change: transform;
-    pointer-events: none;
-  }
-  .shot-viewer__help {
-    flex-shrink: 0;
-    padding: 0.55rem 1rem;
-    font-size: 0.68rem;
-    color: rgba(255,255,255,0.45);
-    text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.08);
-  }
-  body.shot-viewer-open { overflow: hidden; }
+  .redesign-shot__body { padding: 0.75rem; height: calc(100% - 1.6rem); display: flex; flex-direction: column; gap: 0.45rem; }
+  .redesign-shot__hero { height: 38%; border-radius: 0.35rem; }
+  .redesign-shot__row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.35rem; flex: 1; }
+  .redesign-shot__block { border-radius: 0.3rem; }
+  .redesign-shot__nav { display: flex; gap: 0.35rem; margin-bottom: 0.15rem; }
+  .redesign-shot__nav span { height: 0.35rem; border-radius: 999px; width: 18%; }
+  /* Before — dated layout */
+  .redesign-shot--before { background: #e8e4dc; }
+  .redesign-shot--before .redesign-shot__bar { background: #d4cfc4; }
+  .redesign-shot--before .redesign-shot__dot:nth-child(1) { background: #c0392b; }
+  .redesign-shot--before .redesign-shot__dot:nth-child(2) { background: #d4a017; }
+  .redesign-shot--before .redesign-shot__dot:nth-child(3) { background: #27ae60; }
+  .redesign-shot--before .redesign-shot__url { background: rgba(0,0,0,0.08); }
+  .redesign-shot--before .redesign-shot__hero { background: linear-gradient(135deg, #8b9dc3, #6b7fa8); border: 2px solid #fff; }
+  .redesign-shot--before .redesign-shot__block { background: #f5f2eb; border: 1px solid #ccc5b8; }
+  .redesign-shot--before .redesign-shot__nav span { background: #bbb5a8; }
+  .redesign-shot--before .redesign-shot__body { background: #f0ece4; }
+  /* After — modern layout */
+  .redesign-shot--after { background: #0f0f0f; }
+  .redesign-shot--after .redesign-shot__bar { background: #1a1a1a; border-color: rgba(255,255,255,0.06); }
+  .redesign-shot--after .redesign-shot__dot:nth-child(1) { background: #ff5f57; }
+  .redesign-shot--after .redesign-shot__dot:nth-child(2) { background: #febc2e; }
+  .redesign-shot--after .redesign-shot__dot:nth-child(3) { background: #28c840; }
+  .redesign-shot--after .redesign-shot__url { background: rgba(255,255,255,0.08); }
+  .redesign-shot--after .redesign-shot__hero { background: linear-gradient(135deg, rgba(255,77,0,0.35), rgba(255,214,0,0.15)); border: 1px solid rgba(255,77,0,0.25); }
+  .redesign-shot--after .redesign-shot__block { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); }
+  .redesign-shot--after .redesign-shot__nav span { background: rgba(255,255,255,0.15); }
+  .redesign-shot--after .redesign-shot__nav span:first-child { background: var(--accent); width: 12%; }
+  .redesign-shot--after .redesign-shot__body { background: #111; }
 
   /* CONTACT */
   #contact {
@@ -1264,43 +1154,29 @@
   }
 
   @media (max-width: 960px) {
-    .hero-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-layout { grid-template-columns: 1fr; gap: 2.5rem; }
     .hero-copy { max-width: 100%; }
     .hero-visual-wrap, .hero-trust-panel { max-width: 100%; margin: 0 auto; }
     .line--typewriter .typewriter-row { flex-wrap: wrap; white-space: normal; }
     .line--tagline .line-inner { white-space: normal; }
     .hero-trust-panel { grid-template-columns: 1fr; max-width: 100%; }
     .trust-stat { padding-right: 0; padding-bottom: 1rem; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
-    .trust-pills { grid-template-columns: 1fr; }
-    .hero-mini-stack { grid-template-columns: 1fr; }
-    .about-top, .projects-grid { grid-template-columns: 1fr; }
+    .trust-pills { grid-template-columns: 1fr 1fr; }
+    .hero-mini-stack { grid-template-columns: 1fr 1fr; }
+    .about-top, .projects-grid, .redesign-compare { grid-template-columns: 1fr; }
+    .redesign-arrow { transform: rotate(90deg); margin: 0 auto; }
     .exp-timeline::before { left: 20px; }
     .exp-item { grid-template-columns: 1fr; gap: 0.75rem; padding-left: 2.5rem; }
     .exp-date-col { text-align: left; padding: 0; padding-right: 0; }
     .exp-date-col::after { left: -2rem; right: auto; top: 0.35rem; }
     .project-card.featured { grid-column: span 1; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
   }
+
+  /* Desktop nav — reset any mobile drawer styles */
   @media (min-width: 769px) {
-    html { scroll-padding-top: 5rem; }
-    .site-header {
-      z-index: 200;
-      padding: 1.1rem 0;
-      height: auto;
-      transition: padding 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-        background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    .site-header.is-scrolled { padding: 0.65rem 0; }
-    .site-header .nav-inner {
-      display: flex;
-      width: var(--container);
-      height: auto;
-      min-height: 2.75rem;
-      padding: 0;
-      margin: 0 auto;
-    }
-    .nav-drawer { display: none !important; }
     .nav-toggle { display: none !important; }
-    .nav-links--bar {
+    .nav-links {
       display: flex !important;
       position: static !important;
       width: auto !important;
@@ -1318,8 +1194,13 @@
       box-shadow: none !important;
       overflow: visible !important;
     }
-    .nav-links--bar li { width: auto !important; border: none !important; }
-    .nav-links--bar a {
+    .nav-links li {
+      width: auto !important;
+      border: none !important;
+    }
+    .nav-links li.nav-drawer-label,
+    .nav-links li.nav-mobile-cta { display: none !important; }
+    .nav-links a {
       width: auto !important;
       padding: 0.45rem 0 !important;
       font-size: 0.82rem !important;
@@ -1330,149 +1211,81 @@
   }
 
   @media (max-width: 768px) {
-    :root {
-      --nav-bar-h: 3.25rem;
-      --container: min(1480px, calc(100% - 2rem));
-    }
-    section { padding: 4.5rem 0; }
+    :root { --container: min(1480px, calc(100% - 1.5rem)); }
+    section { padding: 4rem 0; }
 
-    .site-header {
-      padding: 0;
-      padding-top: var(--nav-safe-top);
-      height: var(--nav-total-h);
-      box-sizing: border-box;
-      background: rgba(10,10,10,0.98);
-      width: 100%;
-      max-width: 100%;
-      overflow-x: clip;
+    /* —— Mobile nav drawer —— */
+    nav {
+      padding: 0.85rem 0;
+      background: rgba(10,10,10,0.96);
+      z-index: 500;
     }
-    .site-header.is-scrolled {
-      padding-top: var(--nav-safe-top);
-      height: var(--nav-total-h);
-    }
-    .site-header .nav-inner {
-      width: 100%;
-      max-width: 100%;
-      height: var(--nav-bar-h);
-      min-height: var(--nav-bar-h);
-      padding-inline-start: max(1.25rem, env(safe-area-inset-left, 0px));
-      padding-inline-end: max(1.25rem, env(safe-area-inset-right, 0px));
-      margin: 0;
-      box-sizing: border-box;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      grid-template-areas: "logo actions";
-      align-items: center;
-      column-gap: 0.75rem;
-    }
-    .nav-logo {
-      grid-area: logo;
-      font-size: 1.15rem;
-      padding: 0;
-      min-width: 0;
-      flex-shrink: 1;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      justify-self: start;
-    }
-    .nav-links--bar { display: none !important; }
-    .nav-end {
-      grid-area: actions;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      justify-self: end;
-      margin: 0;
-      flex-shrink: 0;
-      min-width: 0;
-    }
+    nav.is-scrolled { padding: 0.55rem 0; }
+    .nav-logo { font-size: 1.2rem; position: relative; z-index: 503; }
+    .nav-end { gap: 0.5rem; position: relative; z-index: 503; margin-left: auto; }
     .nav-cta.nav-cta--bar { display: none; }
     .nav-toggle {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
-      width: 2.75rem;
-      height: 2.75rem;
       min-width: 2.75rem;
       min-height: 2.75rem;
-      margin: 0;
+      padding: 0.55rem;
       background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 0.5rem;
-      box-shadow: none;
-      color: #fff;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 0.55rem;
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.35);
     }
-    .nav-toggle.is-open {
-      background: rgba(255,255,255,0.14);
-      border-color: rgba(255,255,255,0.28);
-    }
-    /* Full-height drawer — collapsed when closed so it can't widen the page */
-    .nav-drawer {
-      --drawer-w: min(20rem, 92vw);
-      display: flex;
+    .nav-links {
+      display: flex !important;
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: min(20rem, 88vw);
+      z-index: 502;
+      margin-left: 0;
       flex-direction: column;
       align-items: stretch;
       justify-content: flex-start;
       gap: 0;
-      list-style: none;
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 0;
-      min-width: 0;
-      height: 100%;
-      height: 100dvh;
-      min-height: 100dvh;
-      z-index: 505;
       margin: 0;
-      padding: calc(var(--nav-total-h) + 0.75rem) 0 calc(1.25rem + env(safe-area-inset-bottom, 0px));
+      padding: calc(4.5rem + env(safe-area-inset-top, 0px)) 1.35rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
       background: linear-gradient(180deg, #141414 0%, #0a0a0a 100%);
-      border: none;
-      box-shadow: none;
+      border-left: 1px solid var(--border-dark);
+      box-shadow: -24px 0 80px rgba(0,0,0,0.65);
+      transform: translate3d(105%, 0, 0);
       visibility: hidden;
       pointer-events: none;
       opacity: 0;
-      overflow: hidden;
-      transition:
-        width 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-        padding 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 0.35s ease,
-        visibility 0.4s ease,
-        border-color 0.4s ease,
-        box-shadow 0.4s ease;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0.4s ease, opacity 0.35s ease;
+      overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
-    .nav-drawer.open {
-      width: var(--drawer-w);
-      padding-inline: 1.35rem;
-      border-left: 1px solid var(--border-dark);
-      box-shadow: -24px 0 80px rgba(0,0,0,0.65);
-      overflow-y: auto;
+    .nav-links.open {
+      transform: translate3d(0, 0, 0);
       visibility: visible;
       pointer-events: auto;
       opacity: 1;
     }
-    .nav-drawer li { width: 100%; border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .nav-drawer li:last-of-type:not(.nav-mobile-cta) { border-bottom: none; }
-    .nav-drawer a {
+    .nav-links li { width: 100%; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-links li:last-of-type:not(.nav-mobile-cta) { border-bottom: none; }
+    .nav-links a {
       width: 100%;
       padding: 1rem 0.25rem;
       font-size: 1rem;
       font-weight: 500;
       letter-spacing: 0.02em;
       color: rgba(255,255,255,0.75);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
     }
-    .nav-drawer a::after { bottom: 0.65rem; }
-    .nav-drawer a.is-active {
+    .nav-links a::after { bottom: 0.65rem; }
+    .nav-links a.is-active {
       color: var(--white);
       padding-left: 0.85rem;
       border-left: 2px solid var(--accent);
     }
-    .nav-drawer li.nav-drawer-label {
+    .nav-links li.nav-drawer-label {
+      display: list-item !important;
       font-size: 0.65rem; font-weight: 600; letter-spacing: 0.14em;
       text-transform: uppercase; color: rgba(255,255,255,0.35);
       padding: 0 0.25rem 1rem;
@@ -1480,7 +1293,8 @@
       list-style: none;
       border-bottom: none !important;
     }
-    .nav-drawer li.nav-mobile-cta {
+    .nav-links li.nav-mobile-cta {
+      display: list-item !important;
       margin-top: auto;
       padding-top: 1.25rem;
       border-bottom: none !important;
@@ -1503,19 +1317,17 @@
     }
     .nav-mobile-talk::after { display: none !important; }
 
-    #hero {
-      min-height: auto;
-      padding-top: calc(var(--nav-total-h) + 1.75rem);
-      padding-bottom: 3rem;
-    }
-    .hero-headline { font-size: clamp(2.4rem, 10vw, 3.5rem); }
+    /* —— Hero —— */
+    #hero { padding: 5.5rem 0 3.5rem; min-height: auto; }
+    .hero-greeting { font-size: clamp(1.15rem, 4.5vw, 1.45rem); margin-bottom: 0.5rem; }
+    .hero-headline { font-size: clamp(2rem, 9vw, 2.85rem); margin-bottom: 1.25rem; }
     .line--typewriter .typewriter-row {
       display: block;
       white-space: normal;
     }
     .typewriter-prefix {
       display: block;
-      margin: 0 0 0.15em;
+      margin: 0 0 0.2em;
       font-size: 0.5em;
       font-weight: 600;
       letter-spacing: 0.02em;
@@ -1523,71 +1335,99 @@
     .typewriter-role {
       display: block;
       line-height: 1.05;
-      font-size: calc(1em - 5px);
+    }
+    .line--tagline { font-size: clamp(1.25rem, 5.5vw, 1.75rem); }
+    .hero-sub { max-width: 100%; font-size: 0.95rem; line-height: 1.75; margin-bottom: 1.75rem; }
+    .hero-actions {
+      flex-direction: column; align-items: stretch; gap: 0.75rem;
+    }
+    .btn-talk, .btn-ghost {
+      width: 100%; justify-content: center;
+      padding: 0.95rem 1.5rem;
     }
     .scroll-hint { display: none; }
-    .project-group-head { flex-direction: column; align-items: flex-start; }
+    .hero-code-line { font-size: 0.52rem; }
+    .hero-tech-tags { justify-content: center; }
+    .trust-pills { grid-template-columns: 1fr; }
 
-    /* Hero — compact stack/scope strip + tighter spacing */
-    .hero-layout { gap: 2rem; }
-    .hero-right { gap: 0.55rem; }
-    .hero-mini-stack {
+    /* —— Sections —— */
+    .section-title { font-size: clamp(1.65rem, 7vw, 2.25rem); }
+    .section-sub { max-width: 100%; font-size: 0.95rem; }
+    .about-top { gap: 2rem; margin-bottom: 2.5rem; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .stat-cell { padding: 1.5rem 1.35rem; }
+
+    /* Skills — compact wrap chips on mobile */
+    #skills .skills-grid {
       display: flex;
-      grid-template-columns: unset;
-      gap: 0;
-      margin-top: 0.35rem;
-      border-radius: 0.65rem;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.07);
-      background: rgba(255,255,255,0.025);
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
     }
-    .hero-mini-card {
-      flex: 1;
-      min-width: 0;
-      padding: 0.55rem 0.65rem;
-      border: none;
-      border-radius: 0;
-      background: transparent;
-      backdrop-filter: none;
+    #skills .skill-tag {
+      width: auto;
+      flex: 0 0 auto;
+      padding: 0.5rem 0.85rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.1);
+      gap: 0.4rem;
+      -webkit-tap-highlight-color: transparent;
     }
-    .hero-mini-card + .hero-mini-card {
-      border-left: 1px solid rgba(255,255,255,0.08);
+    #skills .skill-tag:active {
+      transform: scale(0.97);
+      border-color: rgba(255,77,0,0.35);
+      background: rgba(255,77,0,0.08);
     }
-    .hero-mini-card:hover {
+    #skills .skill-tag:hover {
       transform: none;
-      border-color: transparent;
-      background: rgba(255,255,255,0.03);
+      color: var(--text-light);
+      border-color: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
     }
-    .hero-mini-label {
-      font-size: 0.48rem;
-      letter-spacing: 0.08em;
-      margin-bottom: 0.15rem;
+    #skills .skill-dot {
+      width: 7px; height: 7px;
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.06);
     }
-    .hero-mini-value {
-      font-size: 0.72rem;
-      line-height: 1.25;
-    }
-    .hero-mini-value em { font-size: 0.62rem; }
-    .hero-trust-panel {
-      margin-top: 0;
-      padding: 1rem 1.1rem;
-    }
-    .trust-stat { padding-bottom: 0.75rem; }
 
+    .project-tabs {
+      display: flex; width: 100%; overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .project-tabs::-webkit-scrollbar { display: none; }
+    .project-tab { flex: 1; min-width: max-content; text-align: center; }
+    .project-card { padding: 1.35rem; }
+    .project-card.featured { padding: 1.5rem; }
     .redesign-card { padding: 1.25rem; }
-    .redesign-card-head { margin-bottom: 1rem; }
-    .redesign-compare {
-      grid-template-columns: 1fr;
-      gap: 0.75rem;
+    .redesign-card-head { flex-direction: column; gap: 0.75rem; }
+    .redesign-compare { gap: 1.25rem; }
+    .exp-card { padding: 1.35rem 1.25rem; }
+    .contact-cta-row { flex-direction: column; align-items: stretch; }
+    .contact-cta-row .btn-talk,
+    .contact-cta-row .btn-ghost { width: 100%; justify-content: center; }
+    .contact-links { flex-direction: column; align-items: stretch; }
+    .social-link { justify-content: center; padding: 0.9rem 1.25rem; }
+    .back-to-top {
+      right: 1rem; bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+      width: 2.5rem; height: 2.5rem;
     }
-    .redesign-thumb:hover { transform: none; }
-    .redesign-thumb__label {
-      padding: 0.35rem 0.65rem;
-      font-size: 0.58rem;
-    }
-    .redesign-thumb__frame { max-height: min(480px, 58vh); }
-    .shot-viewer { padding: 0.5rem; }
-    .shot-viewer__panel { width: 100%; max-height: 94dvh; border-radius: 0.65rem; }
+    .project-group-head { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (max-width: 480px) {
+    :root { --container: min(1480px, calc(100% - 1.25rem)); }
+    section { padding: 3.25rem 0; }
+    .hero-headline { font-size: clamp(1.85rem, 10vw, 2.35rem); }
+    .line--tagline { font-size: clamp(1.1rem, 5vw, 1.45rem); }
+    .hero-mini-stack { grid-template-columns: 1fr; }
+    .ai-badges { gap: 0.4rem; }
+    .marquee-item { padding: 0 1.1rem; font-size: 0.68rem; }
+    .redesign-tags { width: 100%; }
   }
 </style>
 </head>
@@ -1597,34 +1437,27 @@
 
 <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
 
-<header class="site-header" id="mainNav">
+<nav id="mainNav">
   <div class="nav-inner">
     <a href="#" class="nav-logo">Anurag<em>.</em>dev</a>
-    <ul class="nav-links nav-links--bar" aria-label="Main">
+    <ul class="nav-links" id="navLinks" role="navigation" aria-label="Main">
+      <li class="nav-drawer-label" aria-hidden="true">Menu</li>
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#redesigns">Redesigns</a></li>
       <li><a href="#experience">Experience</a></li>
+      <li class="nav-mobile-cta"><a href="#contact" class="nav-mobile-talk">Let's Talk</a></li>
     </ul>
     <div class="nav-end">
       <a href="#contact" class="nav-cta nav-cta--bar">Let's Talk</a>
-      <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
         <span class="nav-toggle-icon" aria-hidden="true">
           <span></span><span></span><span></span>
         </span>
       </button>
     </div>
   </div>
-</header>
-
-<ul class="nav-drawer" id="navDrawer" role="navigation" aria-label="Main menu" aria-hidden="true">
-  <li class="nav-drawer-label" aria-hidden="true">Menu</li>
-  <li><a href="#about">About</a></li>
-  <li><a href="#projects">Projects</a></li>
-  <li><a href="#redesigns">Redesigns</a></li>
-  <li><a href="#experience">Experience</a></li>
-  <li class="nav-mobile-cta"><a href="#contact" class="nav-mobile-talk">Let's Talk</a></li>
-</ul>
+</nav>
 
 <section id="hero">
   <div class="hero-bg" aria-hidden="true"></div>
@@ -2085,99 +1918,147 @@
 
 <section id="redesigns" class="section-fade">
   <div class="container">
-    <p class="section-eyebrow reveal" data-reveal="up">Redesign Concepts</p>
+    <p class="section-eyebrow reveal" data-reveal="up">Website Redesigns</p>
     <h2 class="section-title reveal" data-reveal="blur">
       <span class="split-line"><span>Before &amp; after</span></span>
       <span class="split-line"><span>transformations.</span></span>
     </h2>
-    <p class="section-sub reveal" data-reveal="up">Sample mockups built for lead generation — showing how outdated sites can be rebuilt for clarity, speed, and conversion. Tap a preview to open it — scroll to zoom, click and drag to pan.</p>
+    <p class="section-sub reveal" data-reveal="up">Real client sites rebuilt for clarity, speed, and conversion — from outdated layouts to modern, mobile-first experiences.</p>
 
     <div class="redesigns-grid reveal-stagger">
 
       <article class="redesign-card">
         <div class="redesign-card-head">
           <div>
-            <h3 class="redesign-title">Ariston Realty</h3>
-            <p class="redesign-meta">Sample concept: dated property site → modern, mobile-first layout</p>
+            <h3 class="redesign-title">E-commerce Store Refresh</h3>
+            <p class="redesign-meta">Legacy WooCommerce storefront → streamlined product discovery &amp; checkout flow</p>
           </div>
           <div class="redesign-tags">
             <span class="redesign-tag">WordPress</span>
-            <span class="redesign-tag">React</span>
             <span class="redesign-tag">UI/UX</span>
             <span class="redesign-tag">Mobile-first</span>
           </div>
         </div>
         <div class="redesign-compare">
-          <button type="button" class="redesign-thumb" data-shot-viewer data-shot-src="assets/Ariston-Realty-before.png" data-shot-alt="Ariston Realty sample before redesign concept" data-shot-caption="Ariston Realty — Before">
-            <span class="redesign-thumb__label">Before</span>
-            <span class="redesign-thumb__frame">
-              <img src="assets/Ariston-Realty-before.png" alt="" loading="lazy" width="1280" height="800" />
-            </span>
-          </button>
-          <button type="button" class="redesign-thumb redesign-thumb--after" data-shot-viewer data-shot-src="assets/Ariston-Realty-after.png" data-shot-alt="Ariston Realty sample after redesign concept" data-shot-caption="Ariston Realty — After">
-            <span class="redesign-thumb__label">After</span>
-            <span class="redesign-thumb__frame">
-              <img src="assets/Ariston-Realty-after.png" alt="" loading="lazy" width="1280" height="800" />
-            </span>
-          </button>
+          <div class="redesign-panel">
+            <div class="redesign-label redesign-label--before"><span class="redesign-label-dot"></span> Before</div>
+            <div class="redesign-shot redesign-shot--before" role="img" aria-label="Before redesign placeholder">
+              <div class="redesign-shot__bar">
+                <span class="redesign-shot__dot"></span><span class="redesign-shot__dot"></span><span class="redesign-shot__dot"></span>
+                <span class="redesign-shot__url"></span>
+              </div>
+              <div class="redesign-shot__body">
+                <div class="redesign-shot__nav"><span></span><span></span><span></span><span></span></div>
+                <div class="redesign-shot__hero"></div>
+                <div class="redesign-shot__row"><div class="redesign-shot__block"></div><div class="redesign-shot__block"></div><div class="redesign-shot__block"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="redesign-arrow" aria-hidden="true">→</div>
+          <div class="redesign-panel">
+            <div class="redesign-label redesign-label--after"><span class="redesign-label-dot"></span> After</div>
+            <div class="redesign-shot redesign-shot--after" role="img" aria-label="After redesign placeholder">
+              <div class="redesign-shot__bar">
+                <span class="redesign-shot__dot"></span><span class="redesign-shot__dot"></span><span class="redesign-shot__dot"></span>
+                <span class="redesign-shot__url"></span>
+              </div>
+              <div class="redesign-shot__body">
+                <div class="redesign-shot__nav"><span></span><span></span><span></span><span></span></div>
+                <div class="redesign-shot__hero"></div>
+                <div class="redesign-shot__row"><div class="redesign-shot__block"></div><div class="redesign-shot__block"></div><div class="redesign-shot__block"></div></div>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
 
       <article class="redesign-card">
         <div class="redesign-card-head">
           <div>
-            <h3 class="redesign-title">The Dental Surgeon</h3>
-            <p class="redesign-meta">Sample concept: legacy clinic site → cleaner services &amp; booking flow</p>
+            <h3 class="redesign-title">CRM Dashboard Overhaul</h3>
+            <p class="redesign-meta">Cluttered admin panel → clean data views, faster workflows &amp; responsive tables</p>
           </div>
           <div class="redesign-tags">
-            <span class="redesign-tag">WordPress</span>
-            <span class="redesign-tag">React</span>
-            <span class="redesign-tag">UI/UX</span>
-            <span class="redesign-tag">Mobile-first</span>
+            <span class="redesign-tag">Laravel</span>
+            <span class="redesign-tag">Dashboard</span>
+            <span class="redesign-tag">Tailwind</span>
           </div>
         </div>
         <div class="redesign-compare">
-          <button type="button" class="redesign-thumb" data-shot-viewer data-shot-src="assets/The-Dental-Surgeon-before.png" data-shot-alt="The Dental Surgeon sample before redesign concept" data-shot-caption="The Dental Surgeon — Before">
-            <span class="redesign-thumb__label">Before</span>
-            <span class="redesign-thumb__frame">
-              <img src="assets/The-Dental-Surgeon-before.png" alt="" loading="lazy" width="1280" height="800" />
-            </span>
-          </button>
-          <button type="button" class="redesign-thumb redesign-thumb--after" data-shot-viewer data-shot-src="assets/The-Dental-Surgeon-after.png" data-shot-alt="The Dental Surgeon sample after redesign concept" data-shot-caption="The Dental Surgeon — After">
-            <span class="redesign-thumb__label">After</span>
-            <span class="redesign-thumb__frame">
-              <img src="assets/The-Dental-Surgeon-after.png" alt="" loading="lazy" width="1280" height="800" />
-            </span>
-          </button>
+          <div class="redesign-panel">
+            <div class="redesign-label redesign-label--before"><span class="redesign-label-dot"></span> Before</div>
+            <div class="redesign-shot redesign-shot--before" role="img" aria-label="Before redesign placeholder">
+              <div class="redesign-shot__bar">
+                <span class="redesign-shot__dot"></span><span class="redesign-shot__dot"></span><span class="redesign-shot__dot"></span>
+                <span class="redesign-shot__url"></span>
+              </div>
+              <div class="redesign-shot__body">
+                <div class="redesign-shot__nav"><span></span><span></span><span></span><span></span></div>
+                <div class="redesign-shot__hero"></div>
+                <div class="redesign-shot__row"><div class="redesign-shot__block"></div><div class="redesign-shot__block"></div><div class="redesign-shot__block"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="redesign-arrow" aria-hidden="true">→</div>
+          <div class="redesign-panel">
+            <div class="redesign-label redesign-label--after"><span class="redesign-label-dot"></span> After</div>
+            <div class="redesign-shot redesign-shot--after" role="img" aria-label="After redesign placeholder">
+              <div class="redesign-shot__bar">
+                <span class="redesign-shot__dot"></span><span class="redesign-shot__dot"></span><span class="redesign-shot__dot"></span>
+                <span class="redesign-shot__url"></span>
+              </div>
+              <div class="redesign-shot__body">
+                <div class="redesign-shot__nav"><span></span><span></span><span></span><span></span></div>
+                <div class="redesign-shot__hero"></div>
+                <div class="redesign-shot__row"><div class="redesign-shot__block"></div><div class="redesign-shot__block"></div><div class="redesign-shot__block"></div></div>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
 
       <article class="redesign-card">
         <div class="redesign-card-head">
           <div>
-            <h3 class="redesign-title">Kahane Law Office</h3>
-            <p class="redesign-meta">Sample concept: static brochure site → stronger trust &amp; lead capture</p>
+            <h3 class="redesign-title">Agency Landing Page</h3>
+            <p class="redesign-meta">Static brochure site → bold typography, social proof &amp; lead-capture sections</p>
           </div>
           <div class="redesign-tags">
             <span class="redesign-tag">WordPress</span>
-            <span class="redesign-tag">React</span>
             <span class="redesign-tag">Branding</span>
             <span class="redesign-tag">SEO</span>
           </div>
         </div>
         <div class="redesign-compare">
-          <button type="button" class="redesign-thumb" data-shot-viewer data-shot-src="assets/Kahane-Law-Office-before.png" data-shot-alt="Kahane Law Office sample before redesign concept" data-shot-caption="Kahane Law Office — Before">
-            <span class="redesign-thumb__label">Before</span>
-            <span class="redesign-thumb__frame">
-              <img src="assets/Kahane-Law-Office-before.png" alt="" loading="lazy" width="1280" height="800" />
-            </span>
-          </button>
-          <button type="button" class="redesign-thumb redesign-thumb--after" data-shot-viewer data-shot-src="assets/Kahane-Law-Office-after.png" data-shot-alt="Kahane Law Office sample after redesign concept" data-shot-caption="Kahane Law Office — After">
-            <span class="redesign-thumb__label">After</span>
-            <span class="redesign-thumb__frame">
-              <img src="assets/Kahane-Law-Office-after.png" alt="" loading="lazy" width="1280" height="800" />
-            </span>
-          </button>
+          <div class="redesign-panel">
+            <div class="redesign-label redesign-label--before"><span class="redesign-label-dot"></span> Before</div>
+            <div class="redesign-shot redesign-shot--before" role="img" aria-label="Before redesign placeholder">
+              <div class="redesign-shot__bar">
+                <span class="redesign-shot__dot"></span><span class="redesign-shot__dot"></span><span class="redesign-shot__dot"></span>
+                <span class="redesign-shot__url"></span>
+              </div>
+              <div class="redesign-shot__body">
+                <div class="redesign-shot__nav"><span></span><span></span><span></span><span></span></div>
+                <div class="redesign-shot__hero"></div>
+                <div class="redesign-shot__row"><div class="redesign-shot__block"></div><div class="redesign-shot__block"></div><div class="redesign-shot__block"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="redesign-arrow" aria-hidden="true">→</div>
+          <div class="redesign-panel">
+            <div class="redesign-label redesign-label--after"><span class="redesign-label-dot"></span> After</div>
+            <div class="redesign-shot redesign-shot--after" role="img" aria-label="After redesign placeholder">
+              <div class="redesign-shot__bar">
+                <span class="redesign-shot__dot"></span><span class="redesign-shot__dot"></span><span class="redesign-shot__dot"></span>
+                <span class="redesign-shot__url"></span>
+              </div>
+              <div class="redesign-shot__body">
+                <div class="redesign-shot__nav"><span></span><span></span><span></span><span></span></div>
+                <div class="redesign-shot__hero"></div>
+                <div class="redesign-shot__row"><div class="redesign-shot__block"></div><div class="redesign-shot__block"></div><div class="redesign-shot__block"></div></div>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
 
@@ -2239,20 +2120,6 @@
   </div>
 </div> -->
 
-<div class="shot-viewer" id="shotViewer" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Screenshot preview">
-  <div class="shot-viewer__backdrop" id="shotViewerBackdrop"></div>
-  <div class="shot-viewer__panel">
-    <div class="shot-viewer__header">
-      <span class="shot-viewer__caption" id="shotViewerCaption"></span>
-      <button type="button" class="shot-viewer__close" id="shotViewerClose">Close</button>
-    </div>
-    <div class="shot-viewer__stage" id="shotViewerStage">
-      <img class="shot-viewer__img" id="shotViewerImg" src="" alt="" />
-    </div>
-    <p class="shot-viewer__help">Scroll to zoom · Click and drag to move</p>
-  </div>
-</div>
-
 <button class="back-to-top" id="backToTopBtn" aria-label="Back to top" type="button">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
     <path d="M12 19V5"></path>
@@ -2270,14 +2137,18 @@
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* Page load */
-  requestAnimationFrame(() => {
-    document.body.classList.remove('is-loading');
-    setTimeout(() => document.body.classList.add('is-loaded'), 50);
-  });
-  window.addEventListener('load', () => {
+  function finishPageLoad() {
     document.body.classList.remove('is-loading');
     document.body.classList.add('is-loaded');
-  });
+    document.querySelectorAll('.reveal:not(.visible), .reveal-stagger:not(.visible)').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 1.15) el.classList.add('visible');
+    });
+  }
+  document.addEventListener('DOMContentLoaded', finishPageLoad);
+  requestAnimationFrame(finishPageLoad);
+  window.addEventListener('load', finishPageLoad);
+  setTimeout(finishPageLoad, 800);
 
   /* Typewriter — roles cycle like aakash-sharma.netlify.app */
   const typewriterEl = document.getElementById('typewriterText');
@@ -2329,23 +2200,7 @@
   const heroVisual = document.querySelector('.hero-visual-wrap');
   const scrollHint = document.querySelector('.scroll-hint');
   const sections = document.querySelectorAll('section[id]');
-  const navAnchors = document.querySelectorAll('.nav-links--bar a[href^="#"], .nav-drawer a[href^="#"], a.nav-cta--bar[href^="#"]');
-
-  function syncMobileNavHeight() {
-    if (!mainNav || window.innerWidth > 768) return;
-    const bar = mainNav.querySelector('.nav-inner');
-    if (!bar) return;
-    const h = Math.ceil(bar.getBoundingClientRect().height);
-    if (h > 0) document.documentElement.style.setProperty('--nav-bar-h', `${h}px`);
-  }
-  syncMobileNavHeight();
-  window.addEventListener('resize', syncMobileNavHeight, { passive: true });
-  if (document.fonts?.ready) document.fonts.ready.then(syncMobileNavHeight);
-  window.addEventListener('load', syncMobileNavHeight);
-  requestAnimationFrame(() => {
-    syncMobileNavHeight();
-    setTimeout(syncMobileNavHeight, 120);
-  });
+  const navAnchors = document.querySelectorAll('.nav-links a[href^="#"], a.nav-cta--bar[href^="#"]');
 
   const onScroll = () => {
     const scrollY = window.scrollY;
@@ -2515,140 +2370,32 @@
   backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
   const navToggle = document.getElementById('navToggle');
-  const navDrawer = document.getElementById('navDrawer');
+  const navLinks = document.getElementById('navLinks');
   const navBackdrop = document.getElementById('navBackdrop');
+  const mainNav = document.getElementById('mainNav');
 
   function setNavOpen(open) {
-    if (!navDrawer || !navToggle) return;
-    const isOpen = Boolean(open);
-    navDrawer.classList.toggle('open', isOpen);
-    navToggle.classList.toggle('is-open', isOpen);
-    navBackdrop?.classList.toggle('is-visible', isOpen);
-    document.body.classList.toggle('nav-open', isOpen);
-    mainNav?.classList.toggle('menu-open', isOpen);
-    navDrawer.setAttribute('aria-hidden', String(!isOpen));
-    navToggle.setAttribute('aria-expanded', String(isOpen));
-    navToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    if (!navLinks || !navToggle) return;
+    navLinks.classList.toggle('open', open);
+    navToggle.classList.toggle('is-open', open);
+    navBackdrop?.classList.toggle('is-visible', open);
+    document.body.classList.toggle('nav-open', open);
+    mainNav?.classList.toggle('menu-open', open);
+    navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   }
 
-  if (navToggle && navDrawer) {
-    navToggle.addEventListener('click', () => setNavOpen(!navDrawer.classList.contains('open')));
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => setNavOpen(!navLinks.classList.contains('open')));
     navBackdrop?.addEventListener('click', () => setNavOpen(false));
-    navDrawer.querySelectorAll('a').forEach(a => {
+    navLinks.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => setNavOpen(false));
     });
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && navDrawer.classList.contains('open')) setNavOpen(false);
+      if (e.key === 'Escape' && navLinks.classList.contains('open')) setNavOpen(false);
     });
     window.addEventListener('resize', () => {
-      syncMobileNavHeight();
-      if (window.innerWidth > 768 && navDrawer.classList.contains('open')) setNavOpen(false);
-    });
-  }
-
-  /* Screenshot viewer popup */
-  const shotViewer = document.getElementById('shotViewer');
-  const shotViewerBackdrop = document.getElementById('shotViewerBackdrop');
-  const shotViewerStage = document.getElementById('shotViewerStage');
-  const shotViewerImg = document.getElementById('shotViewerImg');
-  const shotViewerCaption = document.getElementById('shotViewerCaption');
-  const shotViewerClose = document.getElementById('shotViewerClose');
-
-  if (shotViewer && shotViewerStage && shotViewerImg) {
-    let viewScale = 1;
-    let viewPanX = 0;
-    let viewPanY = 0;
-    let isPanning = false;
-    let panStartX = 0;
-    let panStartY = 0;
-    let panOriginX = 0;
-    let panOriginY = 0;
-
-    function applyViewTransform() {
-      shotViewerImg.style.transform = `translate(${viewPanX}px, ${viewPanY}px) scale(${viewScale})`;
-    }
-
-    function resetViewTransform() {
-      viewScale = 1;
-      viewPanX = 0;
-      viewPanY = 0;
-      applyViewTransform();
-    }
-
-    function openShotViewer(src, alt, caption) {
-      shotViewerImg.src = src;
-      shotViewerImg.alt = alt;
-      if (shotViewerCaption) shotViewerCaption.textContent = caption;
-      resetViewTransform();
-      shotViewer.classList.add('is-open');
-      shotViewer.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('shot-viewer-open');
-      shotViewerClose?.focus();
-    }
-
-    function closeShotViewer() {
-      shotViewer.classList.remove('is-open');
-      shotViewer.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('shot-viewer-open');
-      shotViewerImg.removeAttribute('src');
-      shotViewerImg.alt = '';
-      isPanning = false;
-      shotViewerStage.classList.remove('is-panning');
-    }
-
-    document.querySelectorAll('[data-shot-viewer]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        openShotViewer(
-          btn.dataset.shotSrc,
-          btn.dataset.shotAlt || '',
-          btn.dataset.shotCaption || ''
-        );
-      });
-    });
-
-    shotViewerClose?.addEventListener('click', closeShotViewer);
-    shotViewerBackdrop?.addEventListener('click', closeShotViewer);
-
-    shotViewerStage.addEventListener('wheel', e => {
-      if (!shotViewer.classList.contains('is-open')) return;
-      e.preventDefault();
-      const delta = e.deltaY > 0 ? -0.12 : 0.12;
-      viewScale = Math.max(0.75, Math.min(3.5, viewScale + delta));
-      applyViewTransform();
-    }, { passive: false });
-
-    shotViewerStage.addEventListener('pointerdown', e => {
-      if (!shotViewer.classList.contains('is-open') || e.button !== 0) return;
-      isPanning = true;
-      panStartX = e.clientX;
-      panStartY = e.clientY;
-      panOriginX = viewPanX;
-      panOriginY = viewPanY;
-      shotViewerStage.classList.add('is-panning');
-      shotViewerStage.setPointerCapture(e.pointerId);
-    });
-
-    shotViewerStage.addEventListener('pointermove', e => {
-      if (!isPanning) return;
-      viewPanX = panOriginX + (e.clientX - panStartX);
-      viewPanY = panOriginY + (e.clientY - panStartY);
-      applyViewTransform();
-    });
-
-    function endViewPan(e) {
-      if (!isPanning) return;
-      isPanning = false;
-      shotViewerStage.classList.remove('is-panning');
-      try { shotViewerStage.releasePointerCapture(e.pointerId); } catch (_) {}
-    }
-
-    shotViewerStage.addEventListener('pointerup', endViewPan);
-    shotViewerStage.addEventListener('pointercancel', endViewPan);
-
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && shotViewer.classList.contains('is-open')) {
-        closeShotViewer();
-      }
+      if (window.innerWidth > 768 && navLinks.classList.contains('open')) setNavOpen(false);
     });
   }
 </script>
