@@ -1,0 +1,26 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  validate-html:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository code
+      uses: actions/checkout@v4
+
+    - name: Lint HTML file
+      uses: htmlhint/htmlhint-action@v2
+      with:
+        file-pattern: "index.html"
+
+  deploy:
+    needs: validate-html
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy status
+      run: echo "HTML validation passed successfully!"
